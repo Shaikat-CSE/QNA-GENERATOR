@@ -1,0 +1,18 @@
+
+AGENT.md
+CLAUDE.md
+.agent-mem/
+
+# Auto-generated agent rules (personalized per developer)
+.brainsync/agent-rules.md
+
+# Auto-generated AI agent exclusions
+.cursorrules
+.clineRules
+.agent/
+.windsurfrules
+.gemini/
+.cline/
+.env
+.env.local
+.qna_cli_state.json

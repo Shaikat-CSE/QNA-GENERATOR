@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python build_html_from_markdowns.py --input-dir \"C:\\\\Users\\\\gmhome\\\\SynologyDrive\\\\Ragmaterials\\\\exam\\\\igcse\\\\Biology\\\\Edexcel Biology \\(4BI1\\)\\\\Layout v1\\\\markdowns\" --html-theme pdf)",
+      "Bash(python build_html_from_markdowns.py --input-dir \"C:\\\\Users\\\\gmhome\\\\SynologyDrive\\\\Ragmaterials\\\\exam\\\\igcse\\\\Biology\\\\Edexcel Biology \\(4BI1\\)\\\\markdowns\" --html-theme pdf)",
+      "Bash(python *)"
+    ]
+  }
+}

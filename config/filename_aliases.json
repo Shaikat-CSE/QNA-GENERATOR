@@ -1,0 +1,28 @@
+{
+  "kind_aliases": {
+    "qp": ["qp", "question paper", "questionpaper", "question-paper", "questions"],
+    "ms": ["ms", "mark scheme", "markscheme", "mark-scheme", "marking scheme", "answers"]
+  },
+  "session_aliases": {
+    "s": ["s", "summer", "june", "may june", "may-june"],
+    "w": ["w", "winter", "november", "october november", "october-november"],
+    "m": ["m", "march", "february march", "february-march"]
+  },
+  "subject_aliases": {
+    "Biology": ["biology", "bio", "4bi1"],
+    "Chemistry": ["chemistry", "chem", "4ch1"],
+    "Physics": ["physics", "phys", "4ph1"],
+    "Computer Science": ["computer science", "computer-science", "computerscience", "cs", "4cp0", "4cs0"],
+    "Mathematics": ["mathematics", "maths", "math", "4ma1"],
+    "Economics": ["economics", "econ"],
+    "Business": ["business"]
+  },
+  "syllabus_aliases": {
+    "IGCSE": ["igcse", "international gcse"],
+    "A-Level": ["alevel", "a level", "a-level"],
+    "IB": ["ib", "international baccalaureate"],
+    "Cambridge": ["cambridge", "cie", "ucles"],
+    "Edexcel": ["edexcel", "pearson"]
+  },
+  "subject_rules": {}
+}

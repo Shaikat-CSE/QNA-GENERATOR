@@ -1,0 +1,257 @@
+{
+  "subject": "IGCSE Computer Science (Edexcel 4CP0)",
+  "chapters": [
+    {
+      "id": "c01",
+      "name": "Computer Systems",
+      "topics": [
+        {
+          "id": "c01_t01",
+          "name": "Hardware Components",
+          "description": "Physical components of computer systems including CPU, memory, and storage devices.",
+          "keywords": [
+            "CPU",
+            "cache",
+            "ROM",
+            "RAM",
+            "input devices",
+            "output devices",
+            "memory",
+            "storage"
+          ]
+        },
+        {
+          "id": "c01_t02",
+          "name": "Software and Operating Systems",
+          "description": "System software including operating system functions and application software.",
+          "keywords": [
+            "operating system",
+            "file management",
+            "device drivers",
+            "utility programs",
+            "embedded systems"
+          ]
+        },
+        {
+          "id": "c01_t03",
+          "name": "Computer Architecture",
+          "description": "Fundamental computer architecture concepts including the fetch-decode-execute cycle and stored program concept.",
+          "keywords": [
+            "Von Neumann architecture",
+            "fetch-decode-execute",
+            "stored program concept",
+            "three-step model",
+            "input process output",
+            "control unit"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "name": "Data Representation",
+      "topics": [
+        {
+          "id": "c02_t01",
+          "name": "Data Types and Units",
+          "description": "Fundamental data types and measurement units used in computing.",
+          "keywords": [
+            "integer",
+            "real",
+            "boolean",
+            "character",
+            "string",
+            "bit",
+            "byte",
+            "kilobyte",
+            "kibibyte",
+            "megabyte"
+          ]
+        },
+        {
+          "id": "c02_t02",
+          "name": "File Size Calculations",
+          "description": "Calculating file sizes from image dimensions, colour depth, and metadata.",
+          "keywords": [
+            "pixel dimensions",
+            "colour depth",
+            "bit depth",
+            "metadata",
+            "file size calculation",
+            "megabytes"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "name": "Algorithms and Programming",
+      "topics": [
+        {
+          "id": "c03_t01",
+          "name": "Algorithm Design",
+          "description": "Designing and representing algorithms using flowcharts and pseudocode.",
+          "keywords": [
+            "algorithm",
+            "flowchart symbols",
+            "selection",
+            "iteration",
+            "sequence",
+            "variables",
+            "conditions"
+          ]
+        },
+        {
+          "id": "c03_t02",
+          "name": "Programming Constructs",
+          "description": "Core programming concepts including data types, variables, and basic operations.",
+          "keywords": [
+            "data types",
+            "variables",
+            "constants",
+            "assignment",
+            "operators",
+            "arithmetic precedence",
+            "random number generation"
+          ]
+        },
+        {
+          "id": "c03_t03",
+          "name": "String Manipulation",
+          "description": "Processing and validating text data in programs.",
+          "keywords": [
+            "string handling",
+            "character checking",
+            "validation",
+            "searching",
+            "concatenation",
+            "substring"
+          ]
+        },
+        {
+          "id": "c03_t04",
+          "name": "File Handling",
+          "description": "Reading from and writing to external files in programs.",
+          "keywords": [
+            "file input",
+            "file output",
+            "reading files",
+            "writing files",
+            "text files",
+            "error handling"
+          ]
+        },
+        {
+          "id": "c03_t05",
+          "name": "Debugging and Logic Errors",
+          "description": "Identifying and correcting errors in program code.",
+          "keywords": [
+            "syntax error",
+            "logic error",
+            "runtime error",
+            "debugging",
+            "code correction",
+            "testing"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "name": "Computer Networks",
+      "topics": [
+        {
+          "id": "c04_t01",
+          "name": "Network Types and Topologies",
+          "description": "Classification of networks by geographical scope and common network configurations.",
+          "keywords": [
+            "LAN",
+            "WAN",
+            "PAN",
+            "local area network",
+            "wide area network",
+            "network classification"
+          ]
+        },
+        {
+          "id": "c04_t02",
+          "name": "Network Data Transmission",
+          "description": "Methods and measurements of data transfer across networks.",
+          "keywords": [
+            "data speed",
+            "bandwidth",
+            "megabits per second",
+            "data transfer",
+            "transmission"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "name": "Data Security and Encryption",
+      "topics": [
+        {
+          "id": "c05_t01",
+          "name": "Data Security",
+          "description": "Protecting data from unauthorised access and understanding security responsibilities.",
+          "keywords": [
+            "authentication",
+            "password security",
+            "data protection",
+            "cloud storage",
+            "access control",
+            "data responsibility"
+          ]
+        },
+        {
+          "id": "c05_t02",
+          "name": "Encryption Techniques",
+          "description": "Encoding data using symmetric encryption methods.",
+          "keywords": [
+            "encryption",
+            "decryption",
+            "cipher",
+            "plaintext",
+            "ciphertext",
+            "substitution cipher",
+            "Pigpen cipher"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c06",
+      "name": "Computational Thinking and Problem Solving",
+      "topics": [
+        {
+          "id": "c06_t01",
+          "name": "Algorithm Implementation",
+          "description": "Converting algorithm logic into executable program code.",
+          "keywords": [
+            "pseudocode to code",
+            "program implementation",
+            "conditional logic",
+            "loop structures",
+            "accumulator",
+            "counter"
+          ]
+        },
+        {
+          "id": "c06_t02",
+          "name": "Data Analysis and Processing",
+          "description": "Processing data sets to extract meaningful information and statistics.",
+          "keywords": [
+            "data analysis",
+            "totalling",
+            "averaging",
+            "sorting",
+            "finding maximum",
+            "ranking",
+            "filtering"
+          ]
+        }
+      ]
+    }
+  ]
+}

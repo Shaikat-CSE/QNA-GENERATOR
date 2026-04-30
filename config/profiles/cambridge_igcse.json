@@ -1,0 +1,24 @@
+{
+  "name": "Cambridge IGCSE",
+  "description": "Cambridge IGCSE question paper and mark scheme parsing.",
+  "taxonomy_file": null,
+  "paper_reference_suffixes": [],
+  "question_drop_patterns": [
+    "^\\d+$",
+    "^Turn over$",
+    "^© UCLES.*$",
+    "^\\[Total:.*\\]$"
+  ],
+  "mark_scheme_drop_patterns": [
+    "^\\d+$",
+    "^Question\\b.*$",
+    "^Answer$",
+    "^Marks$",
+    "^© UCLES.*$"
+  ],
+  "skip_mark_scheme_headers": [
+    "question",
+    "answer",
+    "marks"
+  ]
+}

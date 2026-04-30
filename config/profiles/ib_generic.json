@@ -1,0 +1,23 @@
+{
+  "name": "IB Generic",
+  "description": "Generic IB Diploma Programme question paper and mark scheme parsing.",
+  "taxonomy_file": null,
+  "paper_reference_suffixes": [],
+  "question_drop_patterns": [
+    "^\\d+$",
+    "^Turn over$",
+    "^–\\s*\\d+\\s*–$",
+    "^[A-Z0-9]+–[A-Z0-9]+–[A-Z0-9]+$"
+  ],
+  "mark_scheme_drop_patterns": [
+    "^\\d+$",
+    "^Question\\b.*$",
+    "^Marks$",
+    "^Total$"
+  ],
+  "skip_mark_scheme_headers": [
+    "question",
+    "marks",
+    "total"
+  ]
+}

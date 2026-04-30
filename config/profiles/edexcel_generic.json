@@ -1,0 +1,36 @@
+{
+  "name": "Edexcel Generic",
+  "description": "Generic Edexcel-style question paper and mark scheme parsing without subject taxonomy.",
+  "taxonomy_file": null,
+  "paper_reference_suffixes": ["b", "br"],
+  "question_drop_patterns": [
+    "^\\*P[0-9A-Z]+\\*$",
+    "^\\d+\\s+\\*P[0-9A-Z]+\\*$",
+    "^P[0-9A-Z]+$",
+    "^\\d+$",
+    "^Turn over$",
+    "^Turn over\\s+\\*P[0-9A-Z]+\\*$",
+    "^DO NOT WRITE IN THIS AREA.*$",
+    "^Answer ALL questions\\.$",
+    "^[A-Z0-9]+/[A-Z0-9]+"
+  ],
+  "mark_scheme_drop_patterns": [
+    "^\\d+$",
+    "^Question\\b.*$",
+    "^Number\\b.*$",
+    "^Answer$",
+    "^Mark$",
+    "^Additional guidance$",
+    "^Additional$",
+    "^guidance$"
+  ],
+  "skip_mark_scheme_headers": [
+    "question",
+    "number",
+    "answer",
+    "mark",
+    "additional guidance",
+    "additional",
+    "guidance"
+  ]
+}

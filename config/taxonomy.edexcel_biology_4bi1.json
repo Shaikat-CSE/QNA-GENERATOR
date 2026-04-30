@@ -1,0 +1,161 @@
+{
+  "subject": "Edexcel IGCSE Biology (4BI1)",
+  "chapters": [
+    {
+      "id": "c01",
+      "name": "The nature and variety of living organisms",
+      "topics": [
+        {
+          "id": "c01_t01",
+          "name": "Characteristics and classification of living organisms",
+          "description": "Characteristics of life, kingdoms, classification and identification of organisms.",
+          "keywords": ["living organisms", "characteristics", "classification", "species", "kingdom", "animal", "plant", "bacteria", "fungi"]
+        },
+        {
+          "id": "c01_t02",
+          "name": "Pathogens and microorganisms",
+          "description": "Bacteria, viruses, fungi and other microorganisms in disease and biotechnology.",
+          "keywords": ["pathogen", "disease", "bacteria", "virus", "fungus", "microorganism", "infection", "yeast", "lactobacillus"]
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "name": "Structures and functions in living organisms",
+      "topics": [
+        {
+          "id": "c02_t01",
+          "name": "Cell structure and organisation",
+          "description": "Cells, tissues, organs and specialised cell structures.",
+          "keywords": ["cell", "nucleus", "cytoplasm", "cell membrane", "cell wall", "chloroplast", "vacuole", "ribosome", "mitochondria", "tissue", "organ"]
+        },
+        {
+          "id": "c02_t02",
+          "name": "Biological molecules and food tests",
+          "description": "Carbohydrates, proteins, lipids, enzymes and food tests.",
+          "keywords": ["protein", "carbohydrate", "lipid", "fat", "starch", "glucose", "enzyme", "iodine", "biuret", "benedict"]
+        },
+        {
+          "id": "c02_t03",
+          "name": "Movement of substances",
+          "description": "Diffusion, osmosis, active transport and exchange surfaces.",
+          "keywords": ["diffusion", "osmosis", "active transport", "concentration gradient", "surface area", "absorption", "exchange surface"]
+        },
+        {
+          "id": "c02_t04",
+          "name": "Nutrition in plants",
+          "description": "Photosynthesis, plant mineral ions, leaf structure and plant growth factors.",
+          "keywords": ["photosynthesis", "chlorophyll", "leaf", "stomata", "palisade", "xylem", "nitrate", "magnesium", "carbon dioxide", "transpiration"]
+        },
+        {
+          "id": "c02_t05",
+          "name": "Human nutrition and digestion",
+          "description": "Balanced diet, digestive system, enzymes and absorption.",
+          "keywords": ["balanced diet", "digestion", "amylase", "protease", "lipase", "bile", "stomach", "small intestine", "villi", "nutrition"]
+        },
+        {
+          "id": "c02_t06",
+          "name": "Respiration",
+          "description": "Aerobic and anaerobic respiration, ATP and fermentation.",
+          "keywords": ["respiration", "aerobic", "anaerobic", "atp", "lactic acid", "fermentation", "energy release"]
+        },
+        {
+          "id": "c02_t07",
+          "name": "Gas exchange",
+          "description": "Breathing and gas exchange surfaces in humans and plants.",
+          "keywords": ["alveoli", "lung", "trachea", "bronchus", "bronchiole", "gas exchange", "ventilation", "oxygen", "carbon dioxide", "diaphragm"]
+        },
+        {
+          "id": "c02_t08",
+          "name": "Transport in organisms",
+          "description": "Circulatory system and plant transport systems.",
+          "keywords": ["heart", "blood", "artery", "vein", "capillary", "haemoglobin", "red blood cell", "white blood cell", "phloem", "translocation"]
+        },
+        {
+          "id": "c02_t09",
+          "name": "Excretion and the kidney",
+          "description": "Kidney structure, nephrons, excretion and osmoregulation.",
+          "keywords": ["kidney", "nephron", "urea", "urine", "excretion", "osmoregulation", "filtration", "reabsorption", "ADH"]
+        },
+        {
+          "id": "c02_t10",
+          "name": "Coordination, response and hormones",
+          "description": "Nervous system, homeostasis, hormones and plant responses.",
+          "keywords": ["nervous system", "neurone", "reflex", "homeostasis", "hormone", "adrenaline", "insulin", "auxin", "tropism", "stimulus"]
+        }
+      ]
+    },
+    {
+      "id": "c03",
+      "name": "Reproduction and inheritance",
+      "topics": [
+        {
+          "id": "c03_t01",
+          "name": "Asexual and sexual reproduction",
+          "description": "Mitosis, cloning, fertilisation and gametes.",
+          "keywords": ["asexual", "sexual reproduction", "mitosis", "clone", "gamete", "fertilisation", "zygote"]
+        },
+        {
+          "id": "c03_t02",
+          "name": "Human reproduction and development",
+          "description": "Human reproductive system, menstrual cycle, pregnancy and development.",
+          "keywords": ["ovary", "uterus", "foetus", "placenta", "menstrual cycle", "pregnancy", "testis", "sperm", "egg", "puberty"]
+        },
+        {
+          "id": "c03_t03",
+          "name": "Plant reproduction",
+          "description": "Flower structure, pollination, fertilisation, seeds and germination.",
+          "keywords": ["flower", "pollination", "fertilisation", "seed", "germination", "stigma", "style", "ovule", "anther", "pollen"]
+        },
+        {
+          "id": "c03_t04",
+          "name": "Inheritance and meiosis",
+          "description": "Genes, chromosomes, meiosis and genetic crosses.",
+          "keywords": ["gene", "allele", "dna", "chromosome", "meiosis", "inheritance", "dominant", "recessive", "genotype", "phenotype"]
+        },
+        {
+          "id": "c03_t05",
+          "name": "Variation, selection and evolution",
+          "description": "Variation, natural selection, adaptation and evolution.",
+          "keywords": ["variation", "selection", "evolution", "adaptation", "natural selection", "mutation"]
+        },
+        {
+          "id": "c03_t06",
+          "name": "Genetic modification and biotechnology",
+          "description": "Genetic engineering, biotechnology and micropropagation.",
+          "keywords": ["genetic modification", "gm", "genetic engineering", "transgenic", "biotechnology", "micropropagation", "tissue culture"]
+        }
+      ]
+    },
+    {
+      "id": "c04",
+      "name": "Ecology and the environment",
+      "topics": [
+        {
+          "id": "c04_t01",
+          "name": "Ecosystems, food chains and food webs",
+          "description": "Food chains, food webs, pyramids and ecological relationships.",
+          "keywords": ["ecosystem", "food chain", "food web", "producer", "consumer", "predator", "prey", "decomposer", "biodiversity", "quadrat"]
+        },
+        {
+          "id": "c04_t02",
+          "name": "Cycles and resource flow",
+          "description": "Water, carbon and nitrogen cycles and decomposition.",
+          "keywords": ["carbon cycle", "nitrogen cycle", "water cycle", "decomposition", "decay", "nutrient cycle"]
+        },
+        {
+          "id": "c04_t03",
+          "name": "Human influences on the environment",
+          "description": "Pollution, global warming, conservation and environmental impact.",
+          "keywords": ["pollution", "greenhouse gas", "global warming", "deforestation", "eutrophication", "climate change", "conservation", "environment"]
+        },
+        {
+          "id": "c04_t04",
+          "name": "Food production and sustainable agriculture",
+          "description": "Farming, crop yield, fish farming and sustainable agriculture.",
+          "keywords": ["food production", "fish farming", "aquaculture", "crop yield", "fertiliser", "pesticide", "sustainable", "agriculture", "selective breeding"]
+        }
+      ]
+    }
+  ]
+}

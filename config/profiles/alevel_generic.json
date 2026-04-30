@@ -1,0 +1,30 @@
+{
+  "name": "A-Level Generic",
+  "description": "Generic A-Level question paper and mark scheme parsing for all exam boards.",
+  "taxonomy_file": null,
+  "paper_reference_suffixes": ["a", "ar"],
+  "question_drop_patterns": [
+    "^\\*P[0-9A-Z]+\\*$",
+    "^\\d+\\s+\\*P[0-9A-Z]+\\*$",
+    "^P[0-9A-Z]+$",
+    "^\\d+$",
+    "^Turn over$",
+    "^DO NOT WRITE IN THIS AREA.*$",
+    "^Answer ALL questions\\.$"
+  ],
+  "mark_scheme_drop_patterns": [
+    "^\\d+$",
+    "^Question\\b.*$",
+    "^Number\\b.*$",
+    "^Answer$",
+    "^Mark$",
+    "^Additional guidance$"
+  ],
+  "skip_mark_scheme_headers": [
+    "question",
+    "number",
+    "answer",
+    "mark",
+    "additional guidance"
+  ]
+}
