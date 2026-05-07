@@ -3,7 +3,7 @@ import sys
 import argparse
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from src.pdf_availability_scanner import scan_pdf_directory_report
 
@@ -24,6 +24,7 @@ complete = sum(1 for p in report.papers if p.has_qp and p.has_ms)
 missing_ms = sum(1 for p in report.papers if p.has_qp and not p.has_ms)
 missing_qp = sum(1 for p in report.papers if not p.has_qp and p.has_ms)
 missing_both = sum(1 for p in report.papers if not p.has_qp and not p.has_ms)
+unknown_year = sum(1 for p in report.papers if p.year == "unknown")
 
 print(f"=== Availability Report ===")
 print(f"Total papers: {total}")
@@ -32,6 +33,7 @@ print(f"Missing MS only: {missing_ms}")
 print(f"Missing QP only: {missing_qp}")
 print(f"Missing both: {missing_both}")
 print(f"Files need review: {len(report.review_items)}")
+print(f"Unknown-year rows excluded from matrix: {unknown_year}")
 print()
 
 # By subject
@@ -82,3 +84,17 @@ if report.review_items:
     for item in report.review_items[:10]:
         print(f"  {item.filename}")
         print(f"    Reason: {item.reason}")
+
+if unknown_year > 0:
+    print(f"\n=== Unknown-Year Rows Excluded From Matrix (first 10) ===")
+    count = 0
+    for p in report.papers:
+        if p.year != "unknown":
+            continue
+        paths = [p.qp_path, p.ms_path, p.er_path, p.in_path, p.transcript_path]
+        attached = next((path for path in paths if path and path != "-"), "-")
+        print(f"  {p.paper_key}")
+        print(f"    File: {Path(attached).name if attached != '-' else '-'}")
+        count += 1
+        if count >= 10:
+            break

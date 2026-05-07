@@ -24,7 +24,7 @@ try:
         load_profile,
     )
     from .pdf_availability_scanner import AvailabilityReportWindow, scan_pdf_directory_report
-    from .rename_pdfs import batch_generate_rules, batch_process
+    from .rename_pdfs import batch_generate_rules, batch_process, batch_process_duplicate_cleanup, batch_process_review_only, batch_process_unknown_years
 except ImportError:
     from build_html_from_markdowns import build_site
     from convert_pdfs_to_markdown import (
@@ -39,7 +39,7 @@ except ImportError:
         load_profile,
     )
     from pdf_availability_scanner import AvailabilityReportWindow, scan_pdf_directory_report
-    from rename_pdfs import batch_generate_rules, batch_process
+    from rename_pdfs import batch_generate_rules, batch_process, batch_process_duplicate_cleanup, batch_process_review_only, batch_process_unknown_years
 
 
 class ScrollFrame(ttk.Frame):
@@ -85,6 +85,7 @@ class QNAGuiApp:
         self._cancel_requested = False
         self.output_is_auto = True
         self.latest_site_index_path: Path | None = None
+        self.availability_report_window: AvailabilityReportWindow | None = None
         self.current_view = tk.StringVar(value="convert")
 
         self.profile_options, self.profile_has_taxonomy = self._load_profile_options()
@@ -100,6 +101,7 @@ class QNAGuiApp:
         self.html_theme_var = tk.StringVar(value="modern")
         self.paper_filter_var = tk.StringVar()
         self.limit_var = tk.StringVar()
+        self.download_url_var = tk.StringVar()
         self.status_var = tk.StringVar(value="Ready")
         self.status_color = tk.StringVar(value="#4CAF50")
 
@@ -281,6 +283,7 @@ class QNAGuiApp:
             ("convert", "Convert PDFs", "convert"),
             ("rename", "Rename PDFs", "rename"),
             ("availability", "Availability", "availability"),
+            ("downloads", "Downloads", "downloads"),
             ("settings", "Settings", "settings"),
         ]
 
@@ -358,6 +361,8 @@ class QNAGuiApp:
             self._build_rename_view()
         elif view == "availability":
             self._build_availability_view()
+        elif view == "downloads":
+            self._build_downloads_view()
         elif view == "settings":
             self._build_settings_view()
 
@@ -640,6 +645,119 @@ Flow:
             command=self._scan_availability
         ).pack(side="left")
 
+    def _build_downloads_view(self) -> None:
+        content = self.content_area
+
+        header = tk.Frame(content, bg="#f8fafc")
+        header.pack(fill="x", pady=(0, 20))
+
+        title_frame = tk.Frame(header, bg="#f8fafc")
+        title_frame.pack(fill="x")
+
+        accent_line = tk.Frame(title_frame, bg="#0891b2", height=4, width=60)
+        accent_line.pack(side="left", pady=(0, 10))
+
+        tk.Label(
+            title_frame,
+            text="Bulk Downloads",
+            font=("Segoe UI", 18, "bold"),
+            fg="#0f172a",
+            bg="#f8fafc"
+        ).pack(side="left", padx=(12, 0))
+
+        tk.Label(
+            header,
+            text="Download missing papers for multiple subjects at once",
+            font=("Segoe UI", 10),
+            fg="#64748b",
+            bg="#f8fafc"
+        ).pack(anchor="w", pady=(4, 0))
+
+        scroll = ScrollFrame(content)
+        scroll.pack(fill="both", expand=True)
+
+        self._add_section(scroll.scrollable_frame, "Base Folder", [
+            ("PDF Folder", "input_dir_var", "Browse", self._browse_input_folder),
+        ])
+
+        info_frame = tk.Frame(scroll.scrollable_frame, bg="#ffffff", relief="solid", borderwidth=1)
+        info_frame.pack(fill="x", pady=(0, 16), padx=20)
+
+        info_text = """Bulk Download Features:
+- Auto-detect all subjects in the selected folder
+- Find missing papers for each subject
+- Map URLs to their respective subjects
+- Download only missing files that match subject
+
+Enter a URL below that contains links to exam papers.
+The system will auto-detect which subject each PDF belongs to
+and save it to the correct folder."""
+
+        tk.Label(
+            info_frame,
+            text=info_text,
+            font=("Segoe UI", 9),
+            foreground="#374151",
+            background="#ffffff",
+            justify="left",
+            wraplength=500,
+            anchor="w"
+        ).pack(anchor="w", padx=12, pady=12)
+
+        self._add_section(scroll.scrollable_frame, "Download URL", [
+            ("URL", "download_url_var", None, None),
+        ])
+
+        btn_frame = tk.Frame(scroll.scrollable_frame, bg="#ffffff", relief="solid", borderwidth=1)
+        btn_frame.pack(fill="x", pady=(0, 16), padx=20)
+
+        tk.Label(
+            btn_frame,
+            text="ACTIONS",
+            font=("Segoe UI", 10, "bold"),
+            fg="#0f172a",
+            bg="#ffffff"
+        ).pack(anchor="w", pady=(0, 12))
+
+        btn_row = tk.Frame(btn_frame, bg="#ffffff")
+        btn_row.pack(fill="x")
+
+        tk.Button(
+            btn_row,
+            text="Scan & Download Missing",
+            font=("Segoe UI", 10, "bold"),
+            fg="#ffffff",
+            bg="#0891b2",
+            activebackground="#0e7490",
+            activeforeground="#ffffff",
+            relief="flat",
+            padx=20,
+            pady=10,
+            cursor="hand2",
+            command=self._start_bulk_download
+        ).pack(side="left", padx=(0, 12))
+
+        tk.Button(
+            btn_row,
+            text="Clear Log",
+            font=("Segoe UI", 9),
+            fg="#0891b2",
+            bg="#ffffff",
+            activeforeground="#0e7490",
+            activebackground="#f0fdfa",
+            relief="solid",
+            borderwidth=1,
+            padx=16,
+            pady=8,
+            cursor="hand2",
+            command=self._clear_log
+        ).pack(side="left")
+
+        if hasattr(self, "download_url_var"):
+            pass
+        else:
+            self.download_url_var = tk.StringVar()
+
     def _build_settings_view(self) -> None:
         content = self.content_area
 
@@ -679,7 +797,7 @@ Flow:
 
         tk.Label(
             header_frame,
-            text=title.upper,
+            text=title.upper(),
             font=("Segoe UI", 10, "bold"),
             fg="#0f172a",
             bg="#ffffff"
@@ -989,7 +1107,313 @@ Flow:
         if report.review_items:
             self._append_log(f"Filename review entries: {len(report.review_items)} PDFs")
 
-        AvailabilityReportWindow(self.root, report, input_dir)
+        self.availability_report_window = AvailabilityReportWindow(self.root, report, input_dir)
+
+    def _refresh_availability_after_download(self, input_dir: Path) -> None:
+        try:
+            self._append_log("")
+            self._append_log("Refreshing availability matrix...")
+            report = scan_pdf_directory_report(input_dir)
+            self._append_log(f"Availability updated: {len(report.papers)} papers")
+            if report.review_items:
+                self._append_log(f"Filename review entries: {len(report.review_items)} PDFs")
+
+            existing_window = self.availability_report_window
+            if (
+                existing_window is not None
+                and existing_window.input_dir == input_dir
+                and existing_window.window.winfo_exists()
+            ):
+                existing_window.apply_report(report)
+            else:
+                self.availability_report_window = AvailabilityReportWindow(self.root, report, input_dir)
+        except Exception as e:
+            self._append_log(f"Availability refresh failed: {e}")
+
+    def _start_bulk_download(self) -> None:
+        from src.pdf_scraper import discover_subjects_from_url, scrape_pdfs
+        import threading
+        import re
+
+        input_text = self.input_dir_var.get().strip()
+        url = self.download_url_var.get().strip()
+
+        if not input_text:
+            messagebox.showwarning("Folder Required", "Please select a PDF folder first.")
+            return
+
+        if not url:
+            messagebox.showwarning("URL Required", "Please enter a download URL.")
+            return
+
+        input_dir = Path(input_text)
+        if not input_dir.exists():
+            messagebox.showerror("Invalid Folder", f"Folder does not exist:\n{input_dir}")
+            return
+
+        self._clear_log()
+        self._append_log(f"Base folder: {input_dir}")
+        self._append_log(f"URL: {url}")
+        self._append_log("")
+
+        is_ib_bulk = input_dir.name.lower() == "ib" or "/dp/" in url.lower().rstrip("/") + "/"
+
+        def normalize(name):
+            return re.sub(r'[^a-z0-9]', '', name.lower())
+
+        def find_existing_folders(base_path):
+            folders = {}
+            ignored = {"resources", "_assets", "__pycache__"}
+
+            try:
+                for past_papers in base_path.rglob("*"):
+                    if not past_papers.is_dir():
+                        continue
+                    if past_papers.name.lower() != "past-papers":
+                        continue
+
+                    parts_lower = {part.lower() for part in past_papers.parts}
+                    if ignored & parts_lower:
+                        continue
+
+                    parent = past_papers.parent
+                    if not parent.name:
+                        continue
+
+                    candidates = [parent.name]
+                    board_folder = parent.parent.name if parent.parent != parent else ""
+                    if board_folder and board_folder.lower() not in ignored:
+                        candidates.append(f"{parent.name} {board_folder}")
+
+                    for candidate in candidates:
+                        folders.setdefault(candidate, str(past_papers))
+            except Exception:
+                pass
+
+            return folders
+
+        def find_ib_subject_folders(base_path):
+            folders = {}
+            try:
+                for subject_dir in base_path.iterdir():
+                    if not subject_dir.is_dir():
+                        continue
+
+                    subject_entry = folders.setdefault(subject_dir.name, {})
+                    has_level_dirs = False
+
+                    for level in ("sl", "hl"):
+                        level_dir = subject_dir / level
+                        if level_dir.is_dir():
+                            has_level_dirs = True
+                            subject_entry[level] = str(level_dir / "past-papers")
+
+                    direct_past_papers = subject_dir / "past-papers"
+                    if direct_past_papers.is_dir() or not has_level_dirs:
+                        subject_entry["default"] = str(direct_past_papers)
+            except Exception:
+                pass
+            return folders
+
+        def do_bulk_download():
+            try:
+                def log(msg):
+                    self._append_log(msg)
+
+                log("Discovering subjects from URL...")
+                discovered = discover_subjects_from_url(url, logger=log)
+                log(f"Found {len(discovered)} subjects on URL")
+                for k, v in discovered.items():
+                    log(f"  - {k}: {v['url']}")
+                log("")
+
+                aliases = {
+                    "maths": "mathematics",
+                    "furthermaths": "additionalmathematics",
+                    "science": "combinedscience",
+                    "physicalscience": "physics",
+                    "english": "englishsecondlanguage",
+                    "englishlanguage": "englishsecondlanguage",
+                    "business": "businessstudies",
+                    "businessstudies": "businessstudies",
+                    "designtechnology": "designandtechnology",
+                    "foodandnutrition": "foodandnutrition",
+                    "ict": "ict",
+                    "internationalmathematics": "mathematics",
+                    "combinedscience": "combinedscience",
+                    "chinesefirstlanguage": "chinesefirstlanguage",
+                    "chinesesecondlanguage": "chinesesecondlanguage",
+                    "chinesemandarinforeignlanguage": "chinesemandarinforeignlanguage",
+                    "chinese": "chinesefirstlanguage",
+                    "businessmanagement": "businessmanagement",
+                    "computerscience": "computerscience",
+                    "designtechnology": "designtechnology",
+                    "digitalsocieties": "digitalsocieties",
+                    "englishalanguageliterature": "englishalanguageliterature",
+                    "englishalanguageandliterature": "englishalanguageliterature",
+                    "environmentalsystemssocieties": "environmentalsystemssocieties",
+                    "environmentalsystemsandsocieties": "environmentalsystemssocieties",
+                    "ess": "environmentalsystemssocieties",
+                    "foodscienceandtechnology": "foodscienceandtechnology",
+                    "globalpolitics": "globalpolitics",
+                    "mathematicsaa": "mathematicsaa",
+                    "mathsaa": "mathematicsaa",
+                    "socialandculturalanthropology": "socialandculturalanthropology",
+                    "sportsexercisehealthscience": "sportsexercisehealthscience",
+                    "visualarts": "visualarts",
+                }
+
+                matched = {}
+                results = {}
+
+                if is_ib_bulk:
+                    ib_folders = find_ib_subject_folders(input_dir)
+                    log(f"Found {len(ib_folders)} IB subject folders")
+                    for subject_name, level_map in sorted(ib_folders.items()):
+                        levels = ", ".join(sorted(level_map.keys()))
+                        log(f"  - {subject_name}: {levels}")
+                    log("")
+
+                    ib_normalized = {normalize(name): (name, paths) for name, paths in ib_folders.items()}
+
+                    for key, data in discovered.items():
+                        subject = data["subject"]
+                        norm = normalize(subject)
+                        candidate_keys = [norm]
+                        if norm in aliases:
+                            candidate_keys.append(aliases[norm])
+
+                        folder_entry = None
+                        for candidate in candidate_keys:
+                            if candidate in ib_normalized:
+                                folder_entry = ib_normalized[candidate]
+                                break
+                        if folder_entry is None:
+                            for ex_norm, entry in ib_normalized.items():
+                                if (norm in ex_norm or ex_norm in norm) and abs(len(norm) - len(ex_norm)) <= 10:
+                                    folder_entry = entry
+                                    break
+                        if folder_entry is not None:
+                            matched[key] = (data, folder_entry[0], folder_entry[1])
+
+                    log(f"Matched {len(matched)} IB subjects to folders")
+                    log("")
+
+                    for key, (data, folder_name, level_paths) in sorted(matched.items()):
+                        subject = data["subject"]
+                        board = data.get("board")
+                        disc_url = data["url"]
+                        if "past-papers" not in disc_url.lower():
+                            disc_url = disc_url.rstrip("/") + "/past-papers/"
+
+                        subject_total = 0
+                        subject_errors = []
+                        levels_to_download = [level for level in ("sl", "hl") if level in level_paths]
+                        if not levels_to_download and "default" in level_paths:
+                            levels_to_download = ["default"]
+
+                        log(f"{'='*50}")
+                        log(f"Subject: {subject}")
+                        log(f"Matched Folder: {folder_name}")
+                        log(f"URL: {disc_url}")
+
+                        for level in levels_to_download:
+                            output_dir = level_paths[level]
+                            level_label = level.upper() if level != "default" else "ALL"
+                            log(f"Level: {level_label}")
+                            log(f"Output: {output_dir}")
+
+                            try:
+                                download_level = None if level == "default" else level
+                                downloaded = scrape_pdfs(
+                                    disc_url,
+                                    output_dir,
+                                    target_subject=subject,
+                                    target_board=board,
+                                    target_level=download_level,
+                                    logger=log,
+                                )
+                                subject_total += downloaded
+                            except Exception as e:
+                                log(f"Error ({level_label}): {e}")
+                                subject_errors.append(f"{level_label}: {e}")
+
+                        results[key] = {"downloaded": subject_total}
+                        if subject_errors:
+                            results[key]["error"] = "; ".join(subject_errors)
+                else:
+                    existing_folders = find_existing_folders(input_dir)
+                    log(f"Found {len(existing_folders)} existing folders")
+                    for k, v in existing_folders.items():
+                        log(f"  - {k}")
+                    log("")
+
+                    existing_normalized = {normalize(k): (k, v) for k, v in existing_folders.items()}
+
+                    for key, data in discovered.items():
+                        subject = data["subject"]
+                        board = data.get("board")
+                        norm = normalize(subject)
+                        if board:
+                            norm_with_board = norm + board.lower().replace(" ", "")
+                            if norm_with_board in existing_normalized:
+                                matched[key] = (data, existing_normalized[norm_with_board][1])
+                                continue
+                        if norm in existing_normalized:
+                            matched[key] = (data, existing_normalized[norm][1])
+                        elif norm in aliases:
+                            alias_norm = aliases[norm]
+                            if alias_norm in existing_normalized:
+                                matched[key] = (data, existing_normalized[alias_norm][1])
+                        else:
+                            for ex_norm, (ex_name, ex_path) in existing_normalized.items():
+                                if (norm in ex_norm or ex_norm in norm) and abs(len(norm) - len(ex_norm)) <= 8:
+                                    matched[key] = (data, ex_path)
+                                    break
+
+                    log(f"Matched {len(matched)} subjects to folders")
+                    log("")
+
+                    for key, (data, output_dir) in sorted(matched.items()):
+                        subject = data["subject"]
+                        board = data["board"]
+                        disc_url = data["url"]
+                        if "past-papers" not in disc_url.lower():
+                            disc_url = disc_url.rstrip("/") + "/past-papers/"
+
+                        log(f"{'='*50}")
+                        log(f"Subject: {subject}")
+                        log(f"URL: {disc_url}")
+                        log(f"Output: {output_dir}")
+
+                        try:
+                            result = scrape_pdfs(disc_url, output_dir, target_subject=subject, target_board=board, logger=log)
+                            results[key] = {"downloaded": result}
+                        except Exception as e:
+                            log(f"Error: {e}")
+                            results[key] = {"error": str(e)}
+
+                self._append_log("")
+                self._append_log("=== RESULTS ===")
+                total = 0
+                for subject, result in sorted(results.items()):
+                    downloaded = result.get("downloaded", 0)
+                    total += downloaded
+                    if "error" in result:
+                        self._append_log(f"  {subject}: Downloaded {downloaded} files | ERROR - {result['error']}")
+                    else:
+                        self._append_log(f"  {subject}: Downloaded {downloaded} files")
+                self._append_log("")
+                self._append_log(f"Total: {total} files downloaded")
+                self._append_log("Done!")
+                self.root.after(0, lambda: self._refresh_availability_after_download(input_dir))
+
+            except Exception as e:
+                import traceback
+                self._append_log(f"Error: {str(e)}")
+                self._append_log(traceback.format_exc())
+
+        threading.Thread(target=do_bulk_download, daemon=True).start()
 
     def _set_controls_enabled(self, enabled: bool) -> None:
         state = "normal" if enabled else "disabled"
@@ -1263,15 +1687,54 @@ Flow:
             rule_manager = RuleManager()
 
             async def run_batch():
-                rules_results = await batch_generate_rules(input_dir, client, rule_manager, self._emit_worker_log)
-                rename_results = await batch_process(input_dir, client, rule_manager, self._emit_worker_log)
-                return rules_results, rename_results
+                rules_results = {"skipped": 1}
+                self._emit_worker_log("[rename] skipping rule generation in GUI flow; using existing rules plus MiniMax/forced fallback")
+                duplicate_cleanup_results = await batch_process_duplicate_cleanup(
+                    input_dir,
+                    client,
+                    rule_manager,
+                    self._emit_worker_log,
+                )
+                self._emit_worker_log("[rename] GUI flow skipping broad normalization pass; processing only duplicates, unmapped review files, and unknown-year files")
+                rename_results = []
+                review_results = await batch_process_review_only(
+                    input_dir,
+                    client,
+                    rule_manager,
+                    self._emit_worker_log,
+                    max_concurrency=1,
+                    force_all=True,
+                )
+                unknown_year_results = await batch_process_unknown_years(
+                    input_dir,
+                    client,
+                    rule_manager,
+                    self._emit_worker_log,
+                    max_concurrency=1,
+                    force_all=True,
+                )
+                return rules_results, duplicate_cleanup_results, rename_results, review_results, unknown_year_results
 
-            rules_results, rename_results = asyncio.run(run_batch())
+            rules_results, duplicate_cleanup_results, rename_results, review_results, unknown_year_results = asyncio.run(run_batch())
 
-            total_renamed = sum(r.renamed for r in rename_results)
-            total_low = sum(r.low_confidence for r in rename_results)
-            total_errors = sum(len(r.errors) for r in rename_results)
+            total_renamed = (
+                sum(r.renamed for r in duplicate_cleanup_results)
+                + sum(r.renamed for r in rename_results)
+                + sum(r.renamed for r in review_results)
+                + sum(r.renamed for r in unknown_year_results)
+            )
+            total_low = (
+                sum(r.low_confidence for r in duplicate_cleanup_results)
+                + sum(r.low_confidence for r in rename_results)
+                + sum(r.low_confidence for r in review_results)
+                + sum(r.low_confidence for r in unknown_year_results)
+            )
+            total_errors = (
+                sum(len(r.errors) for r in duplicate_cleanup_results)
+                + sum(len(r.errors) for r in rename_results)
+                + sum(len(r.errors) for r in review_results)
+                + sum(len(r.errors) for r in unknown_year_results)
+            )
 
             summary = []
             summary.append("Rules generated:")
@@ -1279,7 +1742,7 @@ Flow:
                 summary.append(f"  {k}: {v} rules")
             summary.append("")
             summary.append(f"Renamed: {total_renamed}")
-            summary.append(f"Low confidence (skipped): {total_low}")
+            summary.append(f"Forced / unresolved leftovers: {total_low}")
             summary.append(f"Errors: {total_errors}")
 
             self.message_queue.put(

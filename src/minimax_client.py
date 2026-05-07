@@ -3,8 +3,10 @@ from __future__ import annotations
 import json
 import os
 import re
+import time
 import urllib.parse
 import urllib.request
+from urllib.error import HTTPError, URLError
 from dataclasses import dataclass
 from typing import Any, Callable
 
@@ -234,20 +236,53 @@ class MiniMaxClient:
 
         self._log(f"[llm] http POST {url}")
         body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
-        request = urllib.request.Request(
-            url,
-            data=body,
-            method="POST",
-            headers={
-                "content-type": "application/json",
-                "x-api-key": self.config.api_key,
-                "anthropic-version": self.config.anthropic_version,
-            },
-        )
-        with urllib.request.urlopen(request, timeout=self.config.timeout_ms / 1000) as response:
-            raw = response.read().decode("utf-8", "replace")
-            self._log(f"[llm] http {response.status}")
-        return json.loads(raw)
+        headers = {
+            "content-type": "application/json",
+            "x-api-key": self.config.api_key,
+            "anthropic-version": self.config.anthropic_version,
+        }
+
+        max_attempts = 5
+        for attempt in range(1, max_attempts + 1):
+            request = urllib.request.Request(
+                url,
+                data=body,
+                method="POST",
+                headers=headers,
+            )
+            try:
+                with urllib.request.urlopen(request, timeout=self.config.timeout_ms / 1000) as response:
+                    raw = response.read().decode("utf-8", "replace")
+                    self._log(f"[llm] http {response.status}")
+                return json.loads(raw)
+            except HTTPError as exc:
+                retry_after = exc.headers.get("Retry-After") if exc.headers else None
+                raw_error = exc.read().decode("utf-8", "replace")
+                self._log(f"[llm] http error {exc.code} | body={raw_error[:300]}")
+                if exc.code in {408, 409, 425, 429, 500, 502, 503, 504} and attempt < max_attempts:
+                    delay = self._retry_delay_seconds(attempt, retry_after)
+                    self._log(f"[llm] retrying after {delay:.1f}s | attempt={attempt}/{max_attempts}")
+                    time.sleep(delay)
+                    continue
+                raise
+            except URLError as exc:
+                self._log(f"[llm] url error | reason={exc.reason}")
+                if attempt < max_attempts:
+                    delay = self._retry_delay_seconds(attempt)
+                    self._log(f"[llm] retrying after {delay:.1f}s | attempt={attempt}/{max_attempts}")
+                    time.sleep(delay)
+                    continue
+                raise
+
+        raise RuntimeError("MiniMax request failed after retries")
+
+    def _retry_delay_seconds(self, attempt: int, retry_after: str | None = None) -> float:
+        if retry_after:
+            try:
+                return max(1.0, min(30.0, float(retry_after)))
+            except ValueError:
+                pass
+        return min(30.0, 1.5 * (2 ** (attempt - 1)))
 
     def _log(self, message: str) -> None:
         if self.logger is not None:

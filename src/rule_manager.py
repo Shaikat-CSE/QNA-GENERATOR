@@ -26,7 +26,7 @@ class RuleManager:
         try:
             data = json.loads(self.rules_file.read_text(encoding="utf-8"))
             self.rules = {
-                code: SubjectRule(
+                code.lower(): SubjectRule(
                     subject=rule.get("subject", "unknown"),
                     code=rule.get("code", code),
                     board=rule.get("board", ""),
@@ -57,11 +57,11 @@ class RuleManager:
         self.rules_file.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
 
     def add_rule(self, rule: SubjectRule) -> None:
-        self.rules[rule.code] = rule
+        self.rules[rule.code.lower()] = rule
         self.save()
 
     def get_rule(self, code: str) -> Optional[SubjectRule]:
-        return self.rules.get(code)
+        return self.rules.get(code.lower())
 
     def match_filename(self, filename: str) -> Optional[SubjectRule]:
         for code, rule in self.rules.items():

@@ -16,3 +16,67 @@ CLAUDE.md
 .env
 .env.local
 .qna_cli_state.json
+src/downloaded_pdfs/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Temporary directories
+temp_*/
+tmp_*/
+*_demo_*/
+
+# Temporary and test files
+temp_*.py
+temp_*.json
+temp_*.txt
+temp_*.csv
+tmp_*.json
+tmp_*.txt
+tmp_*.csv
+
+# Analysis and report files (generated)
+*_analysis.json
+*_check.json
+*_report.json
+*_renamed_report.json
+*_rename_plan.json
+*_renaming_report.json
+pdf_analysis.json
+multi_subject_check.json
+non_9700_analysis.json
+unknown_*.json
+renamed_*.json
+ib_files_renamed_report.json
+ib_practice_papers_renamed.json
+
+# Temporary content files
+temp_pdf_content.txt
+
+# Task output files
+.tasks/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Log files
+*.log
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/

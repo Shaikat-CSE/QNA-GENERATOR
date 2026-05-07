@@ -22,7 +22,7 @@
     "A-Level": ["alevel", "a level", "a-level"],
     "IB": ["ib", "international baccalaureate"],
     "Cambridge": ["cambridge", "cie", "ucles"],
-    "Edexcel": ["edexcel", "pearson"]
+    "Edexcel": ["edexcel", "pearson", "ed"]
   },
   "subject_rules": {}
 }

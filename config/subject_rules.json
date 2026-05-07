@@ -1,45 +1,27 @@
 {
   "9fr0": {
-    "subject": "Edexcel French (9FR0)",
+    "subject": "french",
     "code": "9fr0",
     "board": "edexcel",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^{year}-(summer|s|jun)-{level}-{subject}-{board}-{code}-p{paper}-{variant}-{type}\\.pdf$"
+      "\\d{4}-[a-z]+-alevel-french-edexcel-9fr0-p\\d+-[a-z]+-(qp|er|tr)\\.pdf",
+      "9fr0_\\w+_\\d+"
     ],
-    "sample_names": [
-      "2018-s-alevel-french-edexcel-9fr0-01-n-ms.pdf",
-      "2018-summer-alevel-french-edexcel-9fr0-p1-n-ms.pdf"
-    ],
-    "confidence": 0.85
-  },
-  "9FR0": {
-    "subject": "Edexcel French (9FR0)",
-    "code": "9FR0",
-    "board": "edexcel",
-    "syllabus": "a-level",
-    "patterns": [
-      "\\d{4}-(jan|jun|nov|mar)-alevel-french-edexcel-9fr0-p\\d-[nvo]-qp\\.pdf"
-    ],
-    "sample_names": [
-      "2018-jun-alevel-french-edexcel-9fr0-p2-n-qp.pdf"
-    ],
+    "sample_names": [],
     "confidence": 0.95
   },
   "7652": {
-    "subject": "AQA French (7652)",
+    "subject": "french",
     "code": "7652",
-    "board": "aqa",
-    "syllabus": "a-level",
+    "board": "",
+    "syllabus": "alevel",
     "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$",
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{type}\\.pdf$"
+      "7652_\\d_\\w+_\\d{4}",
+      "7652_\\d_\\w+"
     ],
-    "sample_names": [
-      "2018-jun-alevel-french-aqa-7652-2-ms.pdf",
-      "2018-jun-alevel-french-aqa-7652-paper2-ms.pdf"
-    ],
-    "confidence": 0.85
+    "sample_names": [],
+    "confidence": 0.6
   },
   "0452": {
     "subject": "Cie Accounting (0452)",
@@ -58,23 +40,6 @@
   },
   "4ac1": {
     "subject": "Edexcel Accounting (4AC1)",
-    "code": "4ac1",
-    "board": "edexcel",
-    "syllabus": "Accounting",
-    "patterns": [
-      "^\\d{4}-[smw]-igcse-accounting-edexcel-4ac1-\\d-[n1]-\\.pdf$",
-      "^\\d{4}-(m|may|s|summer)-igcse-accounting-edexcel-4ac1-\\d-(n|\\d)-qp\\.pdf$",
-      "^2019-[sm]-igcse-accounting-edexcel-4ac1-2-[n1]-qp\\.pdf$"
-    ],
-    "sample_names": [
-      "2019-m-igcse-accounting-edexcel-4ac1-2-n-qp.pdf",
-      "2019-s-igcse-accounting-edexcel-4ac1-2-1-qp.pdf",
-      "2019-may-igcse-accounting-edexcel-4ac1-2-n-qp.pdf"
-    ],
-    "confidence": 0.95
-  },
-  "4AC1": {
-    "subject": "Edexcel Accounting (4AC1)",
     "code": "4AC1",
     "board": "edexcel",
     "syllabus": "igcse",
@@ -85,20 +50,6 @@
       "2019-s-igcse-accounting-edexcel-4ac1-1-01-qp.pdf"
     ],
     "confidence": 0.85
-  },
-  "4PM1": {
-    "subject": "Edexcel Further Pure Mathematics (4PM1)",
-    "code": "4PM1",
-    "board": "edexcel",
-    "syllabus": "igcse",
-    "patterns": [
-      "^{year}-{session}-igcse-further-pure-mathematics-edexcel-4pm1-{paper}-{variant}-qp\\.pdf$"
-    ],
-    "sample_names": [
-      "2024-s-igcse-further-pure-mathematics-edexcel-4pm1-2-1-qp.pdf",
-      "2018-jun-igcse-further-pure-mathematics-edexcel-4pm1-2-3-qp.pdf"
-    ],
-    "confidence": 0.75
   },
   "4pm1": {
     "subject": "Edexcel Further Pure Mathematics (4PM1)",
@@ -123,7 +74,7 @@
     "sample_names": [],
     "confidence": 0.0
   },
-  "4BI1": {
+  "4bi1": {
     "subject": "Edexcel Biology (4BI1)",
     "code": "4BI1",
     "board": "edexcel",
@@ -140,32 +91,29 @@
     "subject": "Cie Business (0450)",
     "code": "0450",
     "board": "cie",
-    "syllabus": "Business Studies",
+    "syllabus": "igcse",
     "patterns": [
-      "^(\\d{4})-(s|jun|mayjun|octnov|w|a)-igcse-businessstudies-cie-(0450)-(1|2|4)-(1|2|3|w|n)-qp\\.pdf$"
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-igcse-business-cie-0450-(\\d+)-(\\d+)-?(qp|ms|er)\\.pdf$"
     ],
     "sample_names": [
-      "2014-mayjun-igcse-businessstudies-cie-0450-1-1-qp.pdf"
+      "2014-s-igcse-business-cie-0450-p1-1-qp.pdf"
     ],
     "confidence": 0.85
   },
-  "4BS1": {
+  "4bs1": {
     "subject": "Edexcel Business (4BS1)",
-    "code": "4BS1",
+    "code": "4bs1",
     "board": "edexcel",
     "syllabus": "igcse",
     "patterns": [
-      "^\\d{4}-(s|jan|jun)-igcse-business-edexcel-4BS1-\\d{1,2}-\\d{1,2}-(qp|ms)\\.pdf$",
-      "^\\d{4}-(s|jan|jun)-igcse-business-edexcel-4BS1-\\d{1,2}-(n|\\d)-?(qp|ms)\\.pdf$",
-      "^\\d{4}-(s|jan|jun)-igcse-business-edexcel-4BS1-p\\d{1,2}-(n|\\d)-?(qp|ms)\\.pdf$"
+      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}\\.pdf$",
+      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$"
     ],
     "sample_names": [
-      "2024-s-igcse-business-edexcel-4bs1-2-3-qp.pdf",
-      "2022-jun-igcse-business-edexcel-4bs1-01-1-qp.pdf",
-      "2023-s-igcse-business-edexcel-4bs1-p2-n-qp.pdf",
-      "2021-s-igcse-business-edexcel-4bs1-2-2-ms.pdf"
+      "2019-s-igcse-business-edexcel-4bs1-02r-ms.pdf",
+      "2019-sum-igcse-business-edexcel-4bs1-02r-qp.pdf"
     ],
-    "confidence": 0.9
+    "confidence": 0.85
   },
   "0620": {
     "subject": "Cie Chemistry (0620)",
@@ -182,21 +130,6 @@
       "2023-w-igcse-chemistry-cie-0620-4-2-ms.pdf"
     ],
     "confidence": 0.85
-  },
-  "4CH1": {
-    "subject": "Edexcel Chemistry (4CH1)",
-    "code": "4CH1",
-    "board": "edexcel",
-    "syllabus": "igcse",
-    "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$"
-    ],
-    "sample_names": [
-      "2019-summer-igcse-chemistry-edexcel-4CH1-1CR-1-msc.pdf",
-      "2019-summer-igcse-chemistry-edexcel-4CH1-1CR-1-qp.pdf",
-      "2019-summer-igcse-chemistry-edexcel-4CH1-2CR-1-qp.pdf"
-    ],
-    "confidence": 0.95
   },
   "4ch1": {
     "subject": "Edexcel Chemistry (4CH1)",
@@ -215,19 +148,6 @@
   },
   "4cn0": {
     "subject": "Edexcel Chinese (4CN0)",
-    "code": "4cn0",
-    "board": "edexcel",
-    "syllabus": "Chinese Mandarin Foreign Language",
-    "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$"
-    ],
-    "sample_names": [
-      "2019-jun-igcse-chinese-edexcel-4cn1-2-r-qp.pdf"
-    ],
-    "confidence": 0.85
-  },
-  "4CN0": {
-    "subject": "Edexcel Chinese (4CN0)",
     "code": "4CN0",
     "board": "edexcel",
     "syllabus": "Chinese Mandarin Foreign Language",
@@ -241,7 +161,7 @@
     ],
     "confidence": 0.75
   },
-  "4CM1": {
+  "4cm1": {
     "subject": "Edexcel Commerce (4CM1)",
     "code": "4CM1",
     "board": "edexcel",
@@ -270,20 +190,20 @@
     ],
     "confidence": 0.85
   },
-  "4CP0": {
+  "4cp0": {
     "subject": "Edexcel Computer Science (4CP0)",
-    "code": "4CP0",
+    "code": "4cp0",
     "board": "edexcel",
-    "syllabus": "Computer Science",
+    "syllabus": "igcse",
     "patterns": [
-      "^\\d{4}-(s|jun|oct|nov)-(alevel|igcse|gcse|olevel)-[a-z]+-edexcel-4CP0-[a-z]?\\d+-\\d+-qp\\.pdf$"
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-igcse-computer-science-edexcel-4cp0-(\\d+)-(\\d+)-?(qp|ms|er)\\.pdf$"
     ],
     "sample_names": [
-      "2019-jun-gcse-computerscience-edexcel-4CP0-2-1-qp.pdf"
+      "2019-s-igcse-computer-science-edexcel-4cp0-01-n-qp.pdf"
     ],
     "confidence": 0.85
   },
-  "4CN0/4CN1": {
+  "4cn0/4cn1": {
     "subject": "Edexcel Chinese (4CN0)",
     "code": "4CN0/4CN1",
     "board": "edexcel",
@@ -297,7 +217,7 @@
     ],
     "confidence": 0.85
   },
-  "4CN1": {
+  "4cn1": {
     "subject": "Edexcel Chinese (4CN0)",
     "code": "4CN1",
     "board": "edexcel",
@@ -311,19 +231,6 @@
       "2019-summer-igcse-mandarin-edexcel-4cn1-01-01-ms.pdf"
     ],
     "confidence": 0.85
-  },
-  "4cp0": {
-    "subject": "Edexcel Computer Science (4CP0)",
-    "code": "4cp0",
-    "board": "edexcel",
-    "syllabus": "Computer Science",
-    "patterns": [
-      "^{year}-[a-z]+-{level}-[a-z]+-{board}-[0-9]+-[0-9]+-[a-z]+.pdf$"
-    ],
-    "sample_names": [
-      "2019-s-igcse-computer-science-edexcel-4cp0-01-1-qp.pdf"
-    ],
-    "confidence": 0.75
   },
   "0455": {
     "subject": "Cie Economics (0455)",
@@ -342,19 +249,6 @@
     "confidence": 0.85
   },
   "4ec1": {
-    "subject": "Ed Economics (4EC0)",
-    "code": "4ec1",
-    "board": "edexcel",
-    "syllabus": "igcse",
-    "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$"
-    ],
-    "sample_names": [
-      "2019-jun-igcse-economics-edexcel-4ec1-02-1-qp.pdf"
-    ],
-    "confidence": 0.85
-  },
-  "4EC1": {
     "subject": "Ed Economics (4EC0)",
     "code": "4EC1",
     "board": "edexcel",
@@ -395,7 +289,7 @@
     ],
     "confidence": 0.75
   },
-  "4ET1": {
+  "4et1": {
     "subject": "Edexcel English Literature (4ET1)",
     "code": "4ET1",
     "board": "edexcel",
@@ -428,13 +322,13 @@
     "subject": "Cie English Language (0500)",
     "code": "0500",
     "board": "cie",
-    "syllabus": "First Language English",
+    "syllabus": "igcse",
     "patterns": [
-      "^(\\d{4})-(s|w|nov?|jun?|m|oct?)-(igcse|gcse|alevel|aslevel)-english-language-(cie|edexcel|aqa)-0?(\\d{3,4})-(\\d{1,2})-(\\d{1,2})-(qp|ms|er|gt|ir|sy).pdf$"
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-igcse-english-language-cie-0500-(\\d+)-(\\d+)-?(qp|ms|er|gt)\\.pdf$",
+      "^0500_[a-z]+_[a-z]+_[a-z]+_p(\\d+)_(\\d+)\\.pdf$"
     ],
     "sample_names": [
-      "2024-s-igcse-english-language-cie-0500-1-e-qp.pdf",
-      "2024-nov-igcse-english-language-cie-0500-2-3-qp.pdf"
+      "0500_er_Unknown_unknown_p1_13.pdf"
     ],
     "confidence": 0.85
   },
@@ -452,34 +346,28 @@
     "confidence": 0.95
   },
   "0460": {
-    "subject": "Cie Geography (0460)",
+    "subject": "geography",
     "code": "0460",
     "board": "cie",
     "syllabus": "igcse",
     "patterns": [
-      "^[0-9]{4}-[a-z]+-(igcse|alevel|gcse|as)-[a-z]+-cie-[0-9]{4}-[0-9p]+-[0-9n]+-(qp|ms|er)$"
+      "\\d{4}-[a-z]+-(?:igcse|alevel|gcse|as)-[a-z]+-[a-z]+-\\d{4}-\\d+-[a-z]+-[a-z]{2,3}\\.pdf"
     ],
-    "sample_names": [
-      "2024-s-igcse-geography-cie-0460-4-3-qp.pdf",
-      "2018-jun-alevel-french-edexcel-9fr0-p2-n-qp.pdf"
-    ],
-    "confidence": 0.95
+    "sample_names": [],
+    "confidence": 0.85
   },
-  "4GE1": {
+  "4ge1": {
     "subject": "Edexcel Geography (4GE0)",
-    "code": "4GE1",
+    "code": "4ge1",
     "board": "edexcel",
     "syllabus": "igcse",
     "patterns": [
-      "^(?P<year>\\d{4}|\\d{2})-(?P<session>sum|summer|win|winter|jan|jun|s|w)-(?P<level>igcse|gcse|alevel|as|a2)-(?P<subject>geography|geo|g)-edexcel-(?P<code>4GE\\d)-(?P<paper>\\d+)-(?P<variant>\\d|n)-(?P<type>qp|ms|er)\\.pdf$",
-      "(?P<year>\\d{4})-(?P<session>[a-z]+)-(?P<level>igcse)-(?P<subject>geography)-edexcel-(?P<code>4GE\\d)-(?P<paper>\\d+)-(?P<variant>\\d+)-(?P<type>qp|ms|er)\\.pdf"
+      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$"
     ],
     "sample_names": [
-      "2019-summer-igcse-geography-edexcel-4ge1-02-1-ms.pdf",
-      "2019-sum-igcse-geography-edexcel-4ge1-02-n-ms.pdf",
-      "2024-s-igcse-geography-edexcel-4ge1-01-1-qp.pdf"
+      "2019-jun-igcse-geography-edexcel-4ge1-p2-1-qp.pdf"
     ],
-    "confidence": 0.85
+    "confidence": 0.95
   },
   "syllabus code": {
     "subject": "Cie Geography (0460)",
@@ -497,18 +385,19 @@
     ],
     "confidence": 0.3
   },
-  "4GE0": {
+  "4ge0": {
     "subject": "Edexcel Geography (4GE0)",
-    "code": "4GE0",
+    "code": "4ge0",
     "board": "edexcel",
     "syllabus": "igcse",
     "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$"
+      "\\d{4}-[a-z]+-[a-z]+-[a-z]+-[a-z]+-\\d{4}[a-z]?-[a-z0-9]+-[a-z0-9]+-[a-z]{2}\\.(pdf| PDF)"
     ],
     "sample_names": [
-      "2019-jun-igcse-geography-edexcel-4ge0-1-01r-qp.pdf"
+      "2019-s-igcse-geography-edexcel-4ge1-01r-1906-ms.pdf",
+      "2019-summer-igcse-geography-edexcel-4ge1-01r-1906-ms.pdf"
     ],
-    "confidence": 0.85
+    "confidence": 0.75
   },
   "0470": {
     "subject": "Cie History (0470)",
@@ -523,20 +412,22 @@
     ],
     "confidence": 0.85
   },
-  "4HI0": {
+  "4hi0": {
     "subject": "Edexcel History (4HI0)",
-    "code": "4HI0",
+    "code": "4hi0",
     "board": "edexcel",
-    "syllabus": "History",
+    "syllabus": "igcse",
     "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$"
+      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$",
+      "^{year}-{month}-{level}-{subject}-{board}-{syllabuscode}-{papernum}-{variant}-{type}\\.pdf$"
     ],
     "sample_names": [
-      "2019-jun-igcse-history-edexcel-4hi1-1-r-qp.pdf"
+      "2019-jun-igcse-history-edexcel-4hi0-2-r-qp.pdf",
+      "2024-s-igcse-history-edexcel-4hi0-1-q-qp.pdf"
     ],
-    "confidence": 0.85
+    "confidence": 0.92
   },
-  "4HI1": {
+  "4hi1": {
     "subject": "Edexcel History (4HI0)",
     "code": "4HI1",
     "board": "edexcel",
@@ -562,36 +453,6 @@
     ],
     "confidence": 0.92
   },
-  "4IT1": {
-    "subject": "Edexcel Ict (4IT0)",
-    "code": "4IT1",
-    "board": "edexcel",
-    "syllabus": "igcse",
-    "patterns": [
-      "^\\d{4}-[sfwm]-igcse-ict-edexcel-4IT\\d-[0-9]+-[0-9]+-(ms|qp|er|gt)\\.pdf$",
-      "^\\d{4}[sfwm]igcseictedexcel4IT\\d\\d+_\\d+_\\d+_(MS|QP|ER|GT)\\.pdf$"
-    ],
-    "sample_names": [
-      "2019-s-igcse-ict-edexcel-4IT1-02-1-ms.pdf",
-      "2019-summer-igcse-ict-edexcel-4it1-02-1906-ms.pdf"
-    ],
-    "confidence": 0.75
-  },
-  "4IT0": {
-    "subject": "Edexcel Ict (4IT0)",
-    "code": "4IT0",
-    "board": "edexcel",
-    "syllabus": "igcse",
-    "patterns": [
-      "{year}-{session}-igcse-ict-edexcel-{code}-{paper}-{variant}-{type}.pdf"
-    ],
-    "sample_names": [
-      "2019-may-igcse-ict-edexcel-4it0-1-1-qp.pdf",
-      "2019-may-igcse-ict-edexcel-4it0-1-2-qp.pdf",
-      "2019-may-igcse-ict-edexcel-4it0-1-3-qp.pdf"
-    ],
-    "confidence": 0.85
-  },
   "4it1": {
     "subject": "Edexcel Ict (4IT0)",
     "code": "4it1",
@@ -604,6 +465,21 @@
       "2019-may-igcse-ict-edexcel-4it1-01-r-qp.pdf"
     ],
     "confidence": 0.85
+  },
+  "4it0": {
+    "subject": "Edexcel Ict (4IT0)",
+    "code": "4it0",
+    "board": "edexcel",
+    "syllabus": "igcse",
+    "patterns": [
+      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$",
+      "{year}-(jan|mar|jun|nov)-{level}-{subject}-{board}-{code}-{paper}-{variant}-(qp|ms|er)\\.pdf"
+    ],
+    "sample_names": [
+      "2020-nov-igcse-ict-edexcel-4it1-01-1-ms.pdf",
+      "2024-sum-igcse-ict-edexcel-4it0-01-2-qp.pdf"
+    ],
+    "confidence": 0.75
   },
   "0580": {
     "subject": "Cie Maths (0580)",
@@ -618,7 +494,7 @@
     ],
     "confidence": 0.85
   },
-  "4IT0/4IT1": {
+  "4it0/4it1": {
     "subject": "Edexcel Ict (4IT0)",
     "code": "4IT0/4IT1",
     "board": "edexcel",
@@ -633,21 +509,17 @@
     "confidence": 0.75
   },
   "9626": {
-    "subject": "Cie Ict (9626)",
+    "subject": "Cie ICT (9626)",
     "code": "9626",
     "board": "cie",
-    "syllabus": "igcse",
+    "syllabus": "a-level",
     "patterns": [
-      "^{year}-[a-z]+-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$",
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$"
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-alevel-ict-cie-9626-(\\w+)-(\\d+)-?(qp|ms|er)\\.pdf$"
     ],
-    "sample_names": [
-      "2018-febmar-igcse-ict-cie-9626-1-12-qp.pdf",
-      "2018-02-igcse-ict-cie-9626-p1-12-qp.pdf"
-    ],
+    "sample_names": [],
     "confidence": 0.75
   },
-  "4MA1": {
+  "4ma1": {
     "subject": "Edexcel Maths (4MA1)",
     "code": "4MA1",
     "board": "edexcel",
@@ -692,21 +564,19 @@
     ],
     "confidence": 0.95
   },
-  "4PH1": {
+  "4ph1": {
     "subject": "Edexcel Physics (4PH1)",
-    "code": "4PH1",
+    "code": "4ph1",
     "board": "edexcel",
     "syllabus": "igcse",
     "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$",
-      "4PH1_{paper}_{type}_{date}"
+      "^(\\d{4})-(jan|jun|nov)-(igcse)-physics-(edexcel)-([0-9a-z]+)-([0-9]+[a-z]?)-([a-z]+)\\.pdf$"
     ],
     "sample_names": [
-      "2019-summer-igcse-physics-edexcel-4PH1-2P-3-msc.pdf",
-      "2019-summer-igcse-physics-edexcel-4PH1-2P-3-qp.pdf",
-      "2019-jun-igcse-physics-edexcel-4PH1-2P-n-msc.pdf"
+      "2019-jun-igcse-physics-edexcel-4ph1-2p-qp.pdf",
+      "2022-nov-igcse-physics-edexcel-4ph1-2p-qp.pdf"
     ],
-    "confidence": 0.75
+    "confidence": 0.88
   },
   "0266": {
     "subject": "Cie Psychology (0266)",
@@ -735,342 +605,248 @@
     "confidence": 0.85
   },
   "7127": {
-    "subject": "AQA Accounting (7127)",
+    "subject": "accounting",
     "code": "7127",
     "board": "aqa",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-p{paper}-{variant}-{type}\\.pdf$",
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$"
+      "7127_\\d+_ms\\.pdf",
+      "[a-z]+-alevel-accounting-aqa-7127-\\d+-[a-z]+-ms\\.pdf"
     ],
-    "sample_names": [
-      "2024-s-alevel-accounting-aqa-7127-1-1-qp.pdf",
-      "specimen-alevel-accounting-aqa-7127-1-1-qp.pdf",
-      "2024-s-alevel-accounting-aqa-7127-p1-1-qp.pdf"
-    ],
-    "confidence": 0.75
+    "sample_names": [],
+    "confidence": 0.65
   },
   "9706": {
-    "subject": "Cie Accounting (9706)",
+    "subject": "accounting",
     "code": "9706",
     "board": "cie",
-    "syllabus": "a-level",
+    "syllabus": "asalevel",
     "patterns": [
-      "^[0-9]{4}-(jan|may|jun|oct|s|w)-(gcse|igcse|alevel|aslevel|olsat)-[a-z]+-cie-[0-9]{4}-[0-9]+-[0-9]+-(qp|ms|er|gt|sf|ex)$.pdf"
+      "\\d{4}-[a-z]+-asalevel-accounting-cie-9706_?\\d*_?\\d*(_[a-z]+)?(_sp|_qp|_ms)?\\.pdf",
+      "\\d{4}-[a-z]+-[a-z]+-accounting-cie-9706_?\\d*_?\\d*\\.pdf"
     ],
-    "sample_names": [
-      "2018-jun-alevel-accounting-cie-9706-12-2-qp.pdf"
-    ],
-    "confidence": 0.92
+    "sample_names": [],
+    "confidence": 0.88
   },
   "7402": {
-    "subject": "AQA Biology (7402)",
+    "subject": "biology",
     "code": "7402",
     "board": "aqa",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^[0-9]{4}-(s|jun|w|aut)-[a-z]+-[a-z]+-[a-z]+-[0-9]{3,4}-[0-9]+-[a-z]-(qp|ms|gt|ir|sf)$.pdf"
+      "\\d{4}-(jan|jun|nov)-alevel-biology-[a-z]+-\\d{4}-\\d+-[a-z]+-qp\\.pdf",
+      "\\d{4}-(jan|jun|nov)-alevel-biology-aqa-\\d{4}-\\d+-[a-z]+-qp\\.pdf"
     ],
-    "sample_names": [
-      "2017-jun-alevel-biology-aqa-7402-3-n-ms.pdf"
-    ],
-    "confidence": 0.85
+    "sample_names": [],
+    "confidence": 0.88
   },
   "9700": {
-    "subject": "Cie Biology (9700)",
+    "subject": "biology",
     "code": "9700",
     "board": "cie",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^\\d{4}-(s|jan|may|jun|oct)-[a-z]+-[a-z]+-(cie|edexcel|aqa)-\\d{4}-\\d+-\\d+-[a-z]{1,2}\\.(pdf|zip)$"
+      "[0-9]{4}-(mar|jun|nov)-alevel-biology-cie-9700-[0-9]+-[0-9]+-(qp|ms).pdf",
+      "[0-9]{4}-(mar|jun|nov)-aslevel-biology-cie-9700-[0-9]+-[0-9]+-(qp|ms).pdf"
     ],
-    "sample_names": [
-      "2018-jun-alevel-biology-cie-9700-1-3-qp.pdf",
-      "2018-jun-as-biology-cie-9700-13-n-qp.pdf"
-    ],
-    "confidence": 0.85
+    "sample_names": [],
+    "confidence": 0.98
   },
   "7132": {
-    "subject": "AQA Business (7132)",
+    "subject": "business",
     "code": "7132",
-    "board": "aqa",
-    "syllabus": "Business",
-    "patterns": [
-      "^(\\d{4})-(s|jun|nov|oct|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|w|wi|su|sum|win)-a?level-business-aqa-7132-(\\d)-(\\d|n)-(qp|ms|in|gt|sr|ir|tn|sp)$"
-    ],
-    "sample_names": [
-      "2019-jun-alevel-business-aqa-7132-3-n-ins.pdf"
-    ],
-    "confidence": 0.85
-  },
-  "9609": {
-    "subject": "Cie Business (9609)",
-    "code": "9609",
     "board": "cie",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$",
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{type}\\.pdf$"
+      "7132_[a-z]+_[a-z]+_\\d+",
+      "IB/G/\\w+/\\d+/\\d+"
     ],
-    "sample_names": [
-      "2016-feb-alevel-business-cie-9609-1-2-qp.pdf",
-      "2016-mar-alevel-business-cie-9609-1-2-qp.pdf",
-      "2016-s-alevel-business-cie-9609-12-qp.pdf"
-    ],
-    "confidence": 0.75
-  },
-  "9BS0": {
-    "subject": "Edexcel Business (9BS0)",
-    "code": "9BS0",
-    "board": "edexcel",
-    "syllabus": "a-level",
-    "patterns": [
-      "^\\d{4}-[sj]-\\w+-business-edexcel-\\w+-\\d+-[a-z]?-qp\\.pdf$"
-    ],
-    "sample_names": [
-      "2017-jun-alevel-business-edexcel-9bs0-01-1-qp.pdf",
-      "2017-s-alevel-business-edexcel-9bs0-01-1-qp.pdf",
-      "2017-jun-alevel-business-edexcel-9bs0-p1-1-qp.pdf"
-    ],
-    "confidence": 0.85
-  },
-  "7405": {
-    "subject": "AQA Chemistry (7405)",
-    "code": "7405",
-    "board": "aqa",
-    "syllabus": "a-level",
-    "patterns": [
-      "^\\d{4}-(jan|mar|jun|nov|s)-alevel-chemistry-aqa-\\d{4}-\\d+-[a-z0-9]+-(qp|ms)\\.pdf$",
-      "^[a-z]{3}\\d{2}\\d{4}\\d\\d{2}$"
-    ],
-    "sample_names": [
-      "2017-jun-alevel-chemistry-aqa-7405-2-01-qp.pdf",
-      "2018-jun-alevel-chemistry-aqa-7405-2-01-qp.pdf",
-      "2017-jun-alevel-chemistry-aqa-7405-2-01-ms.pdf"
-    ],
-    "confidence": 0.9
-  },
-  "9bs0": {
-    "subject": "Edexcel Business (9BS0)",
-    "code": "9bs0",
-    "board": "edexcel",
-    "syllabus": "a-level",
-    "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$"
-    ],
-    "sample_names": [
-      "2022-s-alevel-business-edexcel-9bs0-2-1-qp.pdf"
-    ],
-    "confidence": 0.85
-  },
-  "9701": {
-    "subject": "Cie Chemistry (9701)",
-    "code": "9701",
-    "board": "cie",
-    "syllabus": "a-level",
-    "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$"
-    ],
-    "sample_names": [
-      "2018-mayjun-alevel-chemistry-cie-9701-1-1-ms.pdf",
-      "2018-mayjun-asalevel-chemistry-cie-9701-1-1-qp.pdf",
-      "2018-jun-alevel-chemistry-cie-9701-p1-01-ms.pdf"
-    ],
-    "confidence": 0.85
-  },
-  "9ch0": {
-    "subject": "Edexcel Chemistry (9CH0)",
-    "code": "9ch0",
-    "board": "edexcel",
-    "syllabus": "Chemistry",
-    "patterns": [
-      "^[0-9]{4}-(summer|jan|jun|nov)-alevel-chemistry-edexcel-9ch0-p[0-9]+-[a-z0-9]+-(ms|qp)\\.pdf$"
-    ],
-    "sample_names": [
-      "2018-jun-alevel-chemistry-edexcel-9ch0-01-1806-ms.pdf"
-    ],
-    "confidence": 0.85
-  },
-  "9CH0": {
-    "subject": "Edexcel Chemistry (9CH0)",
-    "code": "9CH0",
-    "board": "edexcel",
-    "syllabus": "a-level",
-    "patterns": [
-      "^{year}-(s|summer|jan|jun)-{level}-{subject}-edexcel-{code}-p?{paper}-{variant}-{type}\\.pdf$",
-      "^{year}-(w|winter|s|summer|jan|jun)-{level}-{subject}-edexcel-{code}-p?{paper}(-\\d+)?-{type}\\.pdf$"
-    ],
-    "sample_names": [
-      "2018-s-alevel-chemistry-edexcel-9ch0-01-1806-ms.pdf",
-      "2018-summer-alevel-chemistry-edexcel-9ch0-01-1806-ms.pdf"
-    ],
+    "sample_names": [],
     "confidence": 0.92
   },
-  "9CN0": {
-    "subject": "Edexcel Chinese (9CN0)",
-    "code": "9CN0",
-    "board": "edexcel",
-    "syllabus": "a-level",
+  "9609": {
+    "subject": "business",
+    "code": "9609",
+    "board": "cie",
+    "syllabus": "alevel",
     "patterns": [
-      "^\\\\d{4}-(s|jun)-alevel-[a-z]+-edexcel-[0-9a-z]+-p\\\\d+-[a-z]+-(ms|qp)\\\\.pdf$"
+      "\\d{4}-(s|jun|nov)-alevel-business-cie-9609-\\d+-[a-z]?-(qp|ms|er|sm).pdf",
+      "\\d{4}-(w|m|s)-alevel-business-cie-9609-\\d+-[a-z]?-qp.pdf"
     ],
-    "sample_names": [
-      "2019-s-alevel-chinese-edexcel-9cn0-p01-n-ms.pdf"
+    "sample_names": [],
+    "confidence": 0.92
+  },
+  "9bs0": {
+    "subject": "business",
+    "code": "9bs0",
+    "board": "edexcel",
+    "syllabus": "alevel",
+    "patterns": [
+      "\\d{4}-[a-z]+-alevel-business-edexcel-9bs0-p\\d+-[a-z]+-qp\\.pdf",
+      "\\d{4}-[a-z]+-alevel-business-edexcel-9bs0-\\d+-[a-z]+-qp\\.pdf",
+      "edexcel_9bs0_.+",
+      "9bs0_.+"
     ],
-    "confidence": 0.85
+    "sample_names": [],
+    "confidence": 0.92
+  },
+  "7405": {
+    "subject": "chemistry",
+    "code": "7405",
+    "board": "aqa",
+    "syllabus": "alevel",
+    "patterns": [
+      "7405_[a-z]+_[a-z]+_[0-9]+",
+      "7405_[a-z]+_[a-z]+_[0-9]+_[a-z]+"
+    ],
+    "sample_names": [],
+    "confidence": 0.95
+  },
+  "9701": {
+    "subject": "chemistry",
+    "code": "9701",
+    "board": "cie",
+    "syllabus": "alevel",
+    "patterns": [
+      "9701_\\d{2}_\\d+_\\w+\\.pdf",
+      "\\d{4}_\\d{2}_\\w+_cie_9701_\\d+_\\d+_\\w+\\.pdf"
+    ],
+    "sample_names": [],
+    "confidence": 0.92
+  },
+  "9ch0": {
+    "subject": "chemistry",
+    "code": "9CH0",
+    "board": "edexcel",
+    "syllabus": "alevel",
+    "patterns": [
+      "\\d{4}-(jan|jun|nov)-alevel-chemistry-edexcel-9ch0-p\\d+-n-qp\\.pdf",
+      "\\d{4}-\\w+-alevel-chemistry-edexcel-9ch0-\\w+-\\w+-qp\\.pdf"
+    ],
+    "sample_names": [],
+    "confidence": 0.95
   },
   "9cn0": {
-    "subject": "Edexcel Chinese (9CN0)",
+    "subject": "chinese",
     "code": "9cn0",
     "board": "edexcel",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^\\d{4}-[a-z]+-[a-z]+-[a-z]+-edexcel-[a-z0-9]+-p\\d+-[a-z0-9]+-(?:qp|ms|er)\\.pdf$"
+      "9cn0.*\\.pdf",
+      "\\d{4}.*chinese.*edexcel.*9cn0.*\\.pdf"
     ],
-    "sample_names": [
-      "2019-sum-alevel-chinese-edexcel-9cn0-02-1-ms.pdf"
-    ],
-    "confidence": 0.85
+    "sample_names": [],
+    "confidence": 0.92
   },
   "7517": {
-    "subject": "AQA Computer Science (7517)",
+    "subject": "computer science",
     "code": "7517",
     "board": "aqa",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^\\d{4}-[a-z]+-[a-z]+-[a-z]+-[a-z]+-\\d{4}-\\d+-[a-z0-9]+-[a-z]+\\.pdf$"
+      "2020-nov-alevel-computer-science-aqa-7517-2-\\d+-\\w+\\.pdf",
+      "2020-nov-alevel-compsci-aqa-7517-p2-\\d+-\\w+\\.pdf",
+      "2020-nov-alevel-cs-aqa-7517-2-\\d+-\\w+\\.pdf"
     ],
-    "sample_names": [
-      "2015-s-alevel-computer-science-aqa-7517-1-1a-qp.pdf",
-      "2015-s-alevel-computer-science-aqa-7517-1-1b-qp.pdf"
-    ],
-    "confidence": 0.85
+    "sample_names": [],
+    "confidence": 0.92
   },
   "9618": {
-    "subject": "Cie Computer Science (9618)",
+    "subject": "computer science",
     "code": "9618",
     "board": "cie",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^\\d{4}-(may|jun)-((as)|(alevel)|(igcse))-[a-z-]+-cie-\\d{4}-\\d+-[\\w]+-(qp|ms|er|insert)\\.pdf$"
+      "\\d{4}-(s|jun|nov)-alevel-computerscience-cie-9618-[0-9]+-[a-z]-qp\\.pdf",
+      "\\d{4}-(s|jun|nov)-alevel-computerscience-cie-9618-[0-9]+-[a-z]-ms\\.pdf"
     ],
-    "sample_names": [
-      "2021-jun-alevel-computer-science-cie-9618-23-1-insert.pdf"
-    ],
+    "sample_names": [],
     "confidence": 0.85
   },
   "9608": {
-    "subject": "Cie Computer Science (9618)",
+    "subject": "computerscience",
     "code": "9608",
     "board": "cie",
-    "syllabus": "a-level",
+    "syllabus": "asalevel",
     "patterns": [
-      "{year}-{session}-a?level-computer.?science-cie-9608-{paper}-{variant}-(qp|ms)\\.pdf"
+      "\\d{4}-[a-z]+-(?:as)?alevel-computerscience-cie-9608-\\d+-[a-z0-9]+-(?:qp|ms)\\.pdf"
     ],
-    "sample_names": [
-      "2024-s-alevel-computer-science-cie-9608-1-3-qp.pdf",
-      "2018-jun-alevel-computer-science-cie-9608-p2-n-ms.pdf"
-    ],
-    "confidence": 0.75
-  },
-  "7136": {
-    "subject": "AQA Economics (7136)",
-    "code": "7136",
-    "board": "aqa",
-    "syllabus": "a-level",
-    "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.(pdf|pdf)$"
-    ],
-    "sample_names": [
-      "2021-jun-alevel-economics-aqa-7136-p2-n-qp.pdf"
-    ],
+    "sample_names": [],
     "confidence": 0.92
   },
+  "7136": {
+    "subject": "economics",
+    "code": "7136",
+    "board": "aqa",
+    "syllabus": "alevel",
+    "patterns": [
+      "7136_\\d_[a-z]_\\w+\\.pdf",
+      "aqa_alevel_economics_7136.*\\.pdf"
+    ],
+    "sample_names": [],
+    "confidence": 0.85
+  },
   "9708": {
-    "subject": "Cie Economics (9708)",
+    "subject": "economics",
     "code": "9708",
     "board": "cie",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$",
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$"
+      "9708_\\d+_\\w+_\\d+\\.pdf",
+      "\\d{4}-\\w+-(?:as|alevel|igcse)-economics-cie-9708-\\d+-[a-z0-9]+-[a-z]+\\.pdf"
     ],
-    "sample_names": [
-      "2021-nov-alevel-economics-cie-9708-2-3-qp.pdf",
-      "2021-nov-a-level-economics-cie-9708-2-3-qp.pdf"
-    ],
-    "confidence": 0.95
+    "sample_names": [],
+    "confidence": 0.92
   },
   "7702": {
-    "subject": "AQA English Language (7702)",
+    "subject": "english-language",
     "code": "7702",
-    "board": "aqa",
-    "syllabus": "a-level",
+    "board": "ib",
+    "syllabus": "alevel",
     "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}\\.pdf$"
+      "2021-jun-alevel-english-language-ib-7702-[0-9]+-[a-z]+-(qp|ms|er)\\.pdf",
+      "ib_jun21_7702_[0-9]+_[a-z]+",
+      "7702_[0-9]+_[a-z]+"
     ],
-    "sample_names": [
-      "2021-jun-alevel-english-language-aqa-7702-2-qp.pdf"
-    ],
+    "sample_names": [],
     "confidence": 0.85
   },
   "9093": {
-    "subject": "Cie English Language (9093)",
+    "subject": "english language",
     "code": "9093",
     "board": "cie",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}(-{paper})?(-{variant})?-{type}\\.pdf$"
+      "9093_\\d+_[a-z]+",
+      "\\d{4}-[a-z]+-alevel-cie-9093-\\d+-\\d+-qp\\.pdf"
     ],
-    "sample_names": [
-      "2021-jun-alevel-english-language-cie-9093-32-qp.pdf"
-    ],
-    "confidence": 0.85
-  },
-  "9EN0": {
-    "subject": "Edexcel English Language (8EL0)",
-    "code": "9EN0",
-    "board": "edexcel",
-    "syllabus": "a-level",
-    "patterns": [
-      "^{year}-(summer|winter|autumn|spring)-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$"
-    ],
-    "sample_names": [
-      "2017-s-alevel-english-language-edexcel-9EN0-3-03-ms.pdf"
-    ],
-    "confidence": 0.85
+    "sample_names": [],
+    "confidence": 0.92
   },
   "9en0": {
-    "subject": "Edexcel English Language (8EL0)",
-    "code": "9en0",
+    "subject": "english-language",
+    "code": "9EN0",
     "board": "edexcel",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-p{paper}-{variant}-{type}\\.pdf$",
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$"
+      "\\d{4}[-_](summer|s|jun|autumn|w|winter)[-_]alevel[-_]english-language[-_]edexcel[-_]9EN0[-_](p\\d|\\d)([-_]\\w)?[-_]ms\\.pdf"
     ],
-    "sample_names": [
-      "2017-sum-alevel-englishlanguage-edexcel-9en0-1-ms.pdf",
-      "2017-summer-gce-english-lang-edexcel-9en0-01-ms.pdf"
-    ],
+    "sample_names": [],
     "confidence": 0.85
   },
   "9695": {
-    "subject": "Cie English Literature (9695)",
+    "subject": "literature",
     "code": "9695",
     "board": "cie",
-    "syllabus": "English Literature",
+    "syllabus": "alevel",
     "patterns": [
-      "^(20\\d{2})-(s|w|m|nov|jun|mayjune)-a(level|level)-english(literature|_literature)-cie-9695-(\\d{1,2})-(\\d)-([a-z]+)\\.pdf$",
-      "^(20\\d{2})-(s|w|m|nov|jun|mayjune)-(as|alevel)_level-literature_in_english-cie-9695-(\\d{2})-(\\d)-(ms|qp|er|gt|ir)\\.pdf$"
+      "9695_\\d+_\\d+_(ms|qp)\\.pdf",
+      "[0-9]{4}-(s|nov|jun)-alevel-literature-cie-9695-\\d+-\\d+-(ms|qp)\\.pdf"
     ],
-    "sample_names": [
-      "2021-jun-alevel-englishliterature-cie-9695-13-1-ms.pdf",
-      "2021-mayjune-alevel-literature_in_english-cie-9695-13-1-ms.pdf"
-    ],
-    "confidence": 0.85
+    "sample_names": [],
+    "confidence": 0.95
   },
-  "8EL0": {
+  "8el0": {
     "subject": "Edexcel English Language (8EL0)",
     "code": "8EL0",
     "board": "edexcel",
@@ -1083,130 +859,87 @@
     ],
     "confidence": 0.95
   },
-  "9ET0": {
-    "subject": "Edexcel English Literature (9ET0)",
+  "9et0": {
+    "subject": "english literature",
     "code": "9ET0",
     "board": "edexcel",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$"
+      "\\d{4}-(?:jan|jun|nov)-(?:alevel|gce|as)-[\\w-]+-edexcel-9et0-\\d+-\\d+-qp\\.pdf"
     ],
-    "sample_names": [
-      "2017-jun-alevel-english-literature-edexcel-9et0-2-n-qp.pdf"
-    ],
-    "confidence": 0.92
-  },
-  "9et0": {
-    "subject": "Edexcel English Literature (9ET0)",
-    "code": "9et0",
-    "board": "edexcel",
-    "syllabus": "a-level",
-    "patterns": [
-      "{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}",
-      "{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{type}"
-    ],
-    "sample_names": [
-      "2017-s-alevel-english-literature-edexcel-9et0-2-02-ms.pdf",
-      "2017-s-alevel-english-lit-edexcel-9et0-p2-ms.pdf"
-    ],
-    "confidence": 0.7
-  },
-  "7367": {
-    "subject": "AQA Further Maths (7367)",
-    "code": "7367",
-    "board": "aqa",
-    "syllabus": "a-level",
-    "patterns": [
-      "^\\d{4}-[a-z]+-(?:alevel|igcse|gcse)-[a-z\\-]+-(?:aqa|cie|edexcel)-\\d{4}-\\d-[n\\d]+-(?:qp|ms)$"
-    ],
-    "sample_names": [
-      "2024-s-alevel-further-maths-aqa-7367-1-n-qp.pdf",
-      "2024-s-alevel-further-maths-aqa-7367-1-1-qp.pdf"
-    ],
+    "sample_names": [],
     "confidence": 0.85
   },
+  "7367": {
+    "subject": "further-mathematics",
+    "code": "7367",
+    "board": "aqa",
+    "syllabus": "alevel",
+    "patterns": [
+      "7367_\\w+_\\w+_\\d+",
+      "{year}-{session}-alevel-further-mathematics-aqa-7367-{paper}-{variant}-{type}"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
   "9231": {
-    "subject": "Cie Further Maths (9231)",
+    "subject": "further-mathematics",
     "code": "9231",
     "board": "cie",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$",
-      "^\\d{4}-[a-z]{3}-[a-z]+-[a-z-]+-[a-z]+-\\d{4}-\\d+-[a-z]+-[a-z]+\\.pdf$"
+      "9231_\\d+_\\w+_\\d+",
+      "9231_\\w+_\\d+"
     ],
-    "sample_names": [
-      "2020-spe-alevel-further-maths-cie-9231-02-sp-qp.pdf",
-      "2018-jun-alevel-further-maths-cie-9231-02-n-qp.pdf"
-    ],
+    "sample_names": [],
     "confidence": 0.85
   },
   "9fm0": {
-    "subject": "Edexcel Further Maths (9FM0)",
+    "subject": "further-mathematics",
     "code": "9fm0",
     "board": "edexcel",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^(20\\d{2})-(s|nov|jan|jun)-(\\das|alevel|gcse|igcse)-[a-z]+-([a-z]+)-([a-z0-9]{4})-p(\\d+)-(\\d|n)-?(qp|ms|er)\\.pdf$"
+      "\\d{4}-\\w+-alevel-further-mathematics-edexcel-9fm0-\\d+-[a-z]-qp\\.pdf",
+      "9fm0_\\d_\\w+"
     ],
-    "sample_names": [
-      "2017-s-alevel-furthermaths-edexcel-9fm0-1-1-qp.pdf",
-      "2024-s-alevel-furthermaths-edexcel-9fm0-p1-n-qp.pdf"
-    ],
-    "confidence": 0.85
-  },
-  "9FM0": {
-    "subject": "Edexcel Further Maths (9FM0)",
-    "code": "9FM0",
-    "board": "edexcel",
-    "syllabus": "a-level",
-    "patterns": [
-      "^[0-9]{4}-(s|jun|nov|w)-[a-z]+-[a-z-]+-(edexcel|cie|aqa|ocr)-[0-9a-z]+-[0-9]+-[a-z0-9]+-(qp|ms|ir|crs)\\.pdf$"
-    ],
-    "sample_names": [
-      "2024-s-alevel-further-maths-edexcel-9fm0-4-g-qp.pdf",
-      "2023-jun-alevel-further-maths-edexcel-9fm0-4-g-qp.pdf",
-      "2022-nov-alevel-further-maths-edexcel-9fm0-4-g-qp.pdf"
-    ],
-    "confidence": 0.9
+    "sample_names": [],
+    "confidence": 0.88
   },
   "7037": {
-    "subject": "AQA Geography (7037)",
+    "subject": "geography",
     "code": "7037",
     "board": "aqa",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^\\d{4}-(jan|jun|nov)-\\w+-\\w+-aqa-7037-\\d-[A-Z]?-insert\\.pdf$"
+      "\\d{4}-[sjw]-[a-z]+-geography-aqa-7037-[pf]\\d-[\\w]+-[\\w]+\\.pdf",
+      "[a-z]+-[\\w]+-geography-aqa-7037-[pf]\\d-[\\w]+-[\\w]+\\.pdf"
     ],
-    "sample_names": [
-      "2019-jun-alevel-geography-aqa-7037-2-g-insert.pdf"
-    ],
-    "confidence": 0.85
+    "sample_names": [],
+    "confidence": 0.92
   },
   "9696": {
-    "subject": "Cie Geography (9696)",
+    "subject": "geography",
     "code": "9696",
     "board": "cie",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^[0-9]{4}-(may|jun|s)-alevel-geography-cie-9696-[0-9]-[0-9]-qp\\.pdf$"
+      "\\d{4}-(s|jun|oct)-alevel-geography-cie-9696-\\d{1,2}(-\\w+)?-(qp|ms|insert)\\.pdf"
     ],
-    "sample_names": [
-      "2014-may-alevel-geography-cie-9696-2-3-qp.pdf"
-    ],
+    "sample_names": [],
     "confidence": 0.95
   },
-  "9GE0": {
-    "subject": "Edexcel Geography (9GE0)",
+  "9ge0": {
+    "subject": "geography",
     "code": "9GE0",
     "board": "edexcel",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^\\d{4}-(s|jun|nov)-(alevel|igcse)-[a-z]+-edexcel-9ge0-p\\d+-[a-z0-9]+-qp\\.pdf$"
+      "\\d{4}-(jan|jun|nov|s)-alevel-geography-edexcel-9ge0-p\\d-[a-z]-qp\\.pdf",
+      "\\d{4}-(jan|jun|nov|s)-alevel-geography-edexcel-9ge0-\\d+-[a-z]-qp\\.pdf"
     ],
-    "sample_names": [
-      "2018-jun-alevel-geography-edexcel-9ge0-p1-n-qp.pdf"
-    ],
-    "confidence": 0.85
+    "sample_names": [],
+    "confidence": 0.88
   },
   "7042": {
     "subject": "AQA History (7042)",
@@ -1223,320 +956,463 @@
     "confidence": 0.95
   },
   "9489": {
-    "subject": "Cie History (9489)",
+    "subject": "history",
     "code": "9489",
     "board": "cie",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "\\d{4}-[a-z]+-[a-z]+-cie-\\d{4}-\\d-[\\w]+-(?:qp|ms)\\.pdf",
-      "\\d{4}-s-(?:as|a)level-[a-z]+-cie-\\d{4}-\\d-\\d-(?:qp|ms)\\.pdf"
+      "9489_\\d+_\\w+_\\d+\\.pdf",
+      "\\d{4}-[sj]-alevel-history-cie-9489-\\d+-\\d+-qp\\.pdf"
     ],
-    "sample_names": [
-      "2018-s-alevel-history-cie-9489-3-3-ms.pdf",
-      "2021-s-alevel-history-cie-9489-3-ms.pdf"
-    ],
-    "confidence": 0.75
-  },
-  "9HI0": {
-    "subject": "Edexcel History (9HI0)",
-    "code": "9HI0",
-    "board": "edexcel",
-    "syllabus": "a-level",
-    "patterns": [
-      "^\\d{4}-(jan|mar|jun|nov|s|w)-alevel-history-edexcel-9hi0-[0-9a-z]+(-[0-9a-z]+)?-(qp|ms|rb)\\.pdf$"
-    ],
-    "sample_names": [
-      "2017-jun-alevel-history-edexcel-9hi0-2f-1-qp.pdf",
-      "2017-jun-alevel-history-edexcel-9hi0-2f-qp.pdf"
-    ],
-    "confidence": 0.85
+    "sample_names": [],
+    "confidence": 0.92
   },
   "9hi0": {
-    "subject": "Edexcel History (9HI0)",
+    "subject": "history",
     "code": "9hi0",
     "board": "edexcel",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$",
-      "^{year}-{session}-alevel-{subject}-edexcel-{code}-p{paper}-{variant}-{type}\\.pdf$"
+      "[0-9]{4}-(jan|jun|oct)-alevel-history-edexcel-9hi0-[0-9]+-[a-z]-qp\\.pdf",
+      "[0-9]{4}-(jan|jun|oct)-alevel-history-edexcel-9hi0-[0-9]+-[a-z]-ms\\.pdf"
     ],
-    "sample_names": [
-      "2017-s-alevel-history-edexcel-9hi0-1a-ms.pdf",
-      "2017-summer-alevel-history-edexcel-9hi01-1a-n-ms.pdf",
-      "2017-jun-alevel-history-edexcel-9hi0-1a-qp.pdf"
-    ],
-    "confidence": 0.75
+    "sample_names": [],
+    "confidence": 0.92
   },
   "7357": {
-    "subject": "AQA Mathematics (7357)",
+    "subject": "maths",
     "code": "7357",
     "board": "aqa",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$",
-      "{year} is 4-digit year \\(e.g., 2024\\)",
-      "{session} is s\\(ummer\\)/w\\(inter\\)/jun/etc",
-      "{level} is alevel/igcse etc",
-      "{subject} is subject name \\(e.g., mathematics\\)",
-      "{board} is exam board \\(aqa/edexcel/cie\\)",
-      "{code} is syllabus code \\(e.g., 7357\\)",
-      "{paper} is paper number \\(e.g., 1/2/3\\)",
-      "{variant} is variant identifier \\(e.g., 1/2/3/n\\)",
-      "{type} is qp/ms/er etc"
+      "\\d{4}-[a-z]+-alevel-maths-aqa-7357-p\\d+-[a-z]+-(qp|ms)\\.pdf"
     ],
-    "sample_names": [
-      "2024-s-alevel-mathematics-aqa-7357-2-1-qp.pdf",
-      "2024-s-alevel-mathematics-aqa-7357-2-n-qp.pdf",
-      "2018-jun-alevel-french-edexcel-9fr0-p2-n-qp.pdf"
-    ],
+    "sample_names": [],
     "confidence": 0.85
   },
   "9709": {
-    "subject": "Cie Mathematics (9709)",
+    "subject": "mathematics",
     "code": "9709",
     "board": "cie",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^\\d{4}-[a-z]+-[a-z]+-[a-z]+-cie-\\d{4}-\\d-[\\dR]-qp\\.pdf$"
+      "9709_[0-9]+_[a-z]+_qp\\.pdf",
+      "[0-9]{4}-[a-z]+-alevel-mathematics-cie-9709-[0-9]+-[0-9]+-[a-z]+\\.pdf"
     ],
-    "sample_names": [
-      "2018-s-alevel-mathematics-cie-9709-3-2-qp.pdf"
-    ],
-    "confidence": 0.92
-  },
-  "9MA0": {
-    "subject": "Edexcel Mathematics (9MA0)",
-    "code": "9MA0",
-    "board": "edexcel",
-    "syllabus": "a-level",
-    "patterns": [
-      "^[0-9]{4}-[a-z]+-[a-z]+-[a-z]+-[a-z]+-[a-z0-9]+-[a-z0-9]+-[a-z]+-[a-z]+\\.pdf$",
-      "^[0-9]{4}-(?:s|jun|nov)-(?:igcse|alevel|gcse)-[a-z]+-(?:cie|edexcel|aqa)-[a-z0-9]+-[a-z0-9]+-[a-z0-9]+-(?:qp|ms|ir)\\.pdf$"
-    ],
-    "sample_names": [
-      "2024-s-alevel-mathematics-edexcel-9ma0-p1-n-qp.pdf",
-      "2023-nov-gcse-physics-aqa-8463-p2-1-qp.pdf",
-      "2018-jun-alevel-french-edexcel-9fr0-p2-n-qp.pdf"
-    ],
+    "sample_names": [],
     "confidence": 0.95
   },
   "9ma0": {
-    "subject": "Edexcel Mathematics (9MA0)",
+    "subject": "maths",
     "code": "9ma0",
     "board": "edexcel",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^[0-9]{4}-[a-z]+-[a-z]+-[a-z]+-[a-z]+-[a-z0-9]+-[0-9n]+-[a-z]+\\.pdf$"
+      "\\d{4}-(s|jun|nov)-(?:a)?level-maths-edexcel-9ma0-\\d-(?:n|r|qp|ms)\\.pdf",
+      "\\d{4}-(s|jun|nov)-(?:a)?level-maths-edexcel-9ma0-\\d-\\d-(?:qp|ms)\\.pdf"
     ],
-    "sample_names": [
-      "2020-s-alevel-mathematics-edexcel-9ma0-1-1-qp.pdf",
-      "2020-s-alevel-mathematics-edexcel-9ma0-p1-n-qp.pdf"
-    ],
+    "sample_names": [],
     "confidence": 0.85
   },
   "7582": {
-    "subject": "AQA Physical Education (7582)",
+    "subject": "physical education",
     "code": "7582",
     "board": "aqa",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$",
-      "year: (19|20)\\d{2}",
-      "session: (jan|jun|nov|s|w)",
-      "level: (alevel|gcse|igcse)",
-      "subject: [a-z]+(?:-[a-z]+)*",
-      "code: \\d{4}",
-      "paper: \\d+",
-      "variant: \\d|n",
-      "type: (qp|ms|gt|er)"
+      "7582_\\w+_\\w+_\\d+",
+      "7582-\\d+-[a-z]-ms\\.pdf",
+      "\\d{4}-jun-alevel-physical-education-aqa-7582-\\d+-[a-z]-ms\\.pdf"
     ],
-    "sample_names": [
-      "2018-jun-alevel-physical-education-aqa-7582-2-n-ms.pdf",
-      "2024-s-alevel-physical-education-aqa-7582-2-n-qp.pdf"
-    ],
-    "confidence": 0.85
+    "sample_names": [],
+    "confidence": 0.88
   },
   "7408": {
-    "subject": "AQA Physics (7408)",
+    "subject": "physics",
     "code": "7408",
     "board": "aqa",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$",
-      "^{year}-(jan|jun|nov)-(alevel|gcse|igcse)-{subject}-{board}-{code}-{paper}-{variant}-(qp|ms|mr|er)$"
+      "7408_\\d+_\\d+_.*",
+      "aqa_alevel_physics_7408.*"
     ],
-    "sample_names": [
-      "2018-jun-alevel-physics-aqa-7408-3-bb-ms.pdf"
-    ],
-    "confidence": 0.95
+    "sample_names": [],
+    "confidence": 0.85
   },
   "9702": {
-    "subject": "Cie Physics (9702)",
+    "subject": "physics",
     "code": "9702",
     "board": "cie",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^\\d{4}-(?:feb|mar|jun|nov)-(?:alevel|aslevel)-physics-cie-9702-p\\d+-\\d+-qp\\.pdf$"
+      "9702_\\d{2}_\\w+_\\d{2}"
     ],
-    "sample_names": [
-      "2018-mar-alevel-physics-cie-9702-p3-3-qp.pdf",
-      "2022-jun-alevel-physics-cie-9702-p3-4-qp.pdf"
-    ],
+    "sample_names": [],
     "confidence": 0.95
   },
-  "9PH0": {
-    "subject": "Edexcel Physics (9PH0)",
-    "code": "9PH0",
+  "9ph0": {
+    "subject": "physics",
+    "code": "9ph0",
     "board": "edexcel",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$"
+      "\\d{4}-(jan|jun|nov)-alevel-physics-edexcel-9ph0-p\\d-[a-z]-(qp|ms|msr)\\.pdf"
     ],
-    "sample_names": [
-      "2018-jun-alevel-physics-edexcel-9ph0-02-n-qp.pdf"
-    ],
-    "confidence": 0.85
+    "sample_names": [],
+    "confidence": 0.95
   },
   "7182": {
-    "subject": "AQA Psychology (7182)",
+    "subject": "psychology",
     "code": "7182",
     "board": "aqa",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$",
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{type}\\.pdf$"
+      "7182_\\d+_\\d+",
+      "\\d{4}-[a-z]+-alevel-psychology-aqa-7182-\\d+-[a-z]+-[a-z]+"
     ],
-    "sample_names": [
-      "2018-jun-alevel-psychology-aqa-7182-2-qp.pdf",
-      "jun18-alevel-psychology-aqa-7182-p2-qp.pdf"
-    ],
-    "confidence": 0.85
+    "sample_names": [],
+    "confidence": 0.95
   },
   "9990": {
-    "subject": "Cie Psychology (9990)",
+    "subject": "psychology",
     "code": "9990",
     "board": "cie",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}/{paper}-{variant}-{type}\\.pdf$",
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$"
+      "9990_\\w+_\\w+_\\d+",
+      "9990-[a-z]+-[a-z]+-\\d+-ms",
+      "9990-[a-z]+-[a-z]+-\\d+-qp"
     ],
-    "sample_names": [
-      "2018-jun-alevel-psychology-cie-9990-1-3-ms.pdf",
-      "2024-s-alevel-psychology-cie-9990-1-3-qp.pdf"
-    ],
-    "confidence": 0.75
+    "sample_names": [],
+    "confidence": 0.85
   },
-  "9PS0": {
-    "subject": "Edexcel Psychology (9PS0)",
-    "code": "9PS0",
+  "9ps0": {
+    "subject": "psychology",
+    "code": "9ps0",
     "board": "edexcel",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^{year:4d}-(?:jun|oct)-{level:[a-z]+}-{subject:[a-z]+}-{board:[a-z]+}-{code:[0-9A-Z]+}-{paper:\\d+}-{variant:\\d+}-(?:qp|ms|er)\\.pdf$"
+      "[0-9]{4}-(jan|jun|nov)-alevel-psychology-edexcel-9ps0-[0-9]+-[pn]-qp\\.pdf",
+      "9ps0_[0-9]+_[pn]_qp"
     ],
-    "sample_names": [
-      "2017-jun-alevel-psychology-edexcel-9ps0-3-1-ms.pdf",
-      "2017-jun-alevel-psychology-edexcel-9ps0-03-1-ms.pdf"
-    ],
-    "confidence": 0.75
+    "sample_names": [],
+    "confidence": 0.92
   },
   "7192": {
-    "subject": "AQA Sociology (7192)",
+    "subject": "sociology",
     "code": "7192",
-    "board": "aqa",
-    "syllabus": "a-level",
+    "board": "cie",
+    "syllabus": "alevel",
     "patterns": [
-      "^[0-9]{4}-(jan|jun|nov)-alevel-sociology-aqa-7192-[0-9]+-[a-z0-9]+-(qp|ms|er)\\.pdf$"
+      "\\d{4}_\\w+_alevel_sociology_\\w+_\\d+_\\d+",
+      "\\d{2}\\w{3}\\d+",
+      "\\d{4}-\\w+-(alevel|as)-sociology-\\w+-\\d{4}-\\d+"
     ],
-    "sample_names": [
-      "2017-jun-alevel-sociology-aqa-7192-1-1-ms.pdf"
-    ],
+    "sample_names": [],
     "confidence": 0.85
   },
   "9699": {
-    "subject": "Cie Sociology (9699)",
+    "subject": "sociology",
     "code": "9699",
     "board": "cie",
-    "syllabus": "a-level",
+    "syllabus": "alevel",
     "patterns": [
-      "^\\d{4}-[sw]-(?:as|alevel)-[a-z]+-cie-\\d{4}-\\d-[\\dms]-(?:qp|ms|er)\\.pdf$"
+      "9699_\\d+_\\d+_\\w+\\.pdf",
+      "\\d{4}-\\w+-\\w+-sociology-cie-9699-\\d+-\\d+-\\w+\\.pdf"
     ],
-    "sample_names": [
-      "2021-s-alevel-sociology-cie-9699-1-3-ms.pdf",
-      "2021-s-alevel-sociology-cie-9699-1-3-qp.pdf"
-    ],
-    "confidence": 0.85
+    "sample_names": [],
+    "confidence": 0.92
   },
-  "ib": {
-    "subject": "sl",
-    "code": "ib",
+  "ib_biology": {
+    "subject": "IB Biology",
+    "code": "ib_biology",
     "board": "ib",
     "syllabus": "ib",
     "patterns": [
-      "^(?P<year>\\d{2}|\\d{4})-(?P<session>m|may|j|jun|nov)-(?P<level>sl|hl)-(?P<subject>\\w+)-(?P<code>[A-Z0-9/]+)-(?P<paper>\\d+)-(?P<variant>[A-Z0-9+]+)-(?P<type>qp|ms)\\.pdf$"
+      "^(\\d{4})-(jan|may|nov|feb|m|june?|spec|mar)-ib-biology-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
     ],
     "sample_names": [
-      "05-m-sl-biology-M05_4_BIOLO_SPM_ENG_TZ1_XX+-1-TZ1_XX+-qp.pdf"
+      "2024-nov-ib-biology-hl-na-paper1-n-ms.pdf",
+      "2005-may-ib-biology-sl-na-paper1-tz1-qp.pdf",
+      "2020-feb-ib-biology-sl-na-paper3-qp.pdf"
     ],
-    "confidence": 0.75
+    "confidence": 0.95
   },
-  "BIOLO": {
-    "subject": "hl",
-    "code": "BIOLO",
+  "ib_business_management": {
+    "subject": "IB Business Management",
+    "code": "ib_business_management",
     "board": "ib",
     "syllabus": "ib",
     "patterns": [
-      "^M(\\d{2})/(\\d)/([A-Z]+)/([A-Z]+)/([A-Z]+)/([A-Z\\d]+)/([A-Z]+)/([A-Z+]+)$"
+      "^(\\d{4})-(jan|may|nov|feb|m|june?)-ib-business(-(jan|may|nov|feb|m|june?|spec|mar)anagement)?-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
     ],
     "sample_names": [
-      "2005-may-hl-biology-ib-biolo-1-tz1-xx-ms.pdf"
+      "2024-nov-ib-business-hl-na-paper1-tz1-qp.pdf",
+      "2024-nov-ib-business-management-hl-na-paper1-tz1-qp.pdf"
     ],
-    "confidence": 0.85
+    "confidence": 0.95
   },
-  "IB": {
-    "subject": "hl",
-    "code": "IB",
+  "ib_chemistry": {
+    "subject": "IB Chemistry",
+    "code": "ib_chemistry",
     "board": "ib",
     "syllabus": "ib",
     "patterns": [
-      "M{yy}/{component}/{subject}/{level}-{lang}-{tz}-{variant}\\+?"
+      "^(\\d{4})-(jan|may|nov|feb|m|june?|spec|mar)-ib-chemistry-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
     ],
     "sample_names": [
-      "M05-4-biolo-hl-eng-tz1-xx+.pdf",
-      "2005-s-hl-biology-ib-4-1-tz1-qp.pdf"
+      "2024-nov-ib-chemistry-hl-na-paper1-n-ms.pdf"
     ],
-    "confidence": 0.85
+    "confidence": 0.95
   },
-  "2205-6016": {
-    "subject": "sl",
-    "code": "2205-6016",
+  "ib_chinese_b_mandarin": {
+    "subject": "IB Chinese B Mandarin",
+    "code": "ib_chinese_b_mandarin",
     "board": "ib",
     "syllabus": "ib",
     "patterns": [
-      "^[0-9]{4}-[a-z]{2,3}-[a-z]+-[a-z]+-[a-z]+-[0-9]{4}-[0-9]+-[a-z0-9/]+-(qp|ms)\\.pdf$"
+      "^(\\d{4})-(jan|may|nov|feb|m|june?)-ib-chinese(-b-(jan|may|nov|feb|m|june?|spec|mar)andarin)?-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
     ],
     "sample_names": [
-      "2005-may-sl-biology-ib-2205-6016-1-tz2-xx-qp.pdf"
+      "2024-nov-ib-chinese-b-mandarin-hl-na-paper1-tz1-qp.pdf"
     ],
-    "confidence": 0.75
+    "confidence": 0.95
   },
-  "4bs1": {
-    "subject": "Edexcel Business (4BS1)",
-    "code": "4bs1",
-    "board": "edexcel",
-    "syllabus": "igcse",
+  "ib_computer_science": {
+    "subject": "IB Computer Science",
+    "code": "ib_computer_science",
+    "board": "ib",
+    "syllabus": "ib",
     "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}\\.pdf$",
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$"
+      "^(\\d{4})-(jan|may|nov|feb|m|june?|spec|mar)-ib-computer(-science)?-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
     ],
     "sample_names": [
-      "2019-s-igcse-business-edexcel-4bs1-02r-ms.pdf",
-      "2019-sum-igcse-business-edexcel-4bs1-02r-qp.pdf"
+      "2024-nov-ib-computer-science-hl-na-paper1-tz1-qp.pdf"
     ],
-    "confidence": 0.85
+    "confidence": 0.95
   },
-  "4EC0/4EC1": {
+  "ib_design_technology": {
+    "subject": "IB Design Technology",
+    "code": "ib_design_technology",
+    "board": "ib",
+    "syllabus": "ib",
+    "patterns": [
+      "^(\\d{4})-(jan|may|nov|feb|m|june?|spec|mar)-ib-design(-technology)?-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
+    ],
+    "sample_names": [
+      "2024-nov-ib-design-technology-hl-na-paper1-tz1-qp.pdf"
+    ],
+    "confidence": 0.95
+  },
+  "ib_digital_societies": {
+    "subject": "IB Digital Societies",
+    "code": "ib_digital_societies",
+    "board": "ib",
+    "syllabus": "ib",
+    "patterns": [
+      "^(\\d{4})-(jan|may|nov|feb|m|june?|spec|mar)-ib-digital(-societies)?-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
+    ],
+    "sample_names": [
+      "2024-nov-ib-digital-societies-hl-na-paper1-tz1-qp.pdf"
+    ],
+    "confidence": 0.95
+  },
+  "ib_economics": {
+    "subject": "IB Economics",
+    "code": "ib_economics",
+    "board": "ib",
+    "syllabus": "ib",
+    "patterns": [
+      "^(\\d{4})-(jan|may|nov|feb|m|june?|spec|mar)-ib-economics-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
+    ],
+    "sample_names": [
+      "2024-nov-ib-economics-hl-na-paper1-tz1-qp.pdf"
+    ],
+    "confidence": 0.95
+  },
+  "ib_english_a_language_literature": {
+    "subject": "IB English A Language Literature",
+    "code": "ib_english_a_language_literature",
+    "board": "ib",
+    "syllabus": "ib",
+    "patterns": [
+      "^(\\d{4})-(jan|may|nov|feb|m|june?|spec|mar)-ib-english(-a-language-literature)?-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
+    ],
+    "sample_names": [
+      "2024-nov-ib-english-a-language-literature-hl-na-paper1-tz1-qp.pdf"
+    ],
+    "confidence": 0.95
+  },
+  "ib_environmental_systems_societies": {
+    "subject": "IB Environmental Systems Societies",
+    "code": "ib_environmental_systems_societies",
+    "board": "ib",
+    "syllabus": "ib",
+    "patterns": [
+      "^(\\d{4})-(jan|may|nov|feb|m|june?|spec|mar)-ib-environmental(-systems-societies)?-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
+    ],
+    "sample_names": [
+      "2024-nov-ib-environmental-systems-societies-hl-na-paper1-tz1-qp.pdf"
+    ],
+    "confidence": 0.95
+  },
+  "ib_food_science_and_technology": {
+    "subject": "IB Food Science and Technology",
+    "code": "ib_food_science_and_technology",
+    "board": "ib",
+    "syllabus": "ib",
+    "patterns": [
+      "^(\\d{4})-(jan|may|nov|feb|m|june?|spec|mar)-ib-food(-science-and-technology)?-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
+    ],
+    "sample_names": [
+      "2024-nov-ib-food-science-and-technology-hl-na-paper1-tz1-qp.pdf"
+    ],
+    "confidence": 0.95
+  },
+  "ib_geography": {
+    "subject": "IB Geography",
+    "code": "ib_geography",
+    "board": "ib",
+    "syllabus": "ib",
+    "patterns": [
+      "^(\\d{4})-(jan|may|nov|feb|m|june?|spec|mar)-ib-geography-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
+    ],
+    "sample_names": [
+      "2024-nov-ib-geography-hl-na-paper1-tz1-qp.pdf"
+    ],
+    "confidence": 0.95
+  },
+  "ib_global_politics": {
+    "subject": "IB Global Politics",
+    "code": "ib_global_politics",
+    "board": "ib",
+    "syllabus": "ib",
+    "patterns": [
+      "^(\\d{4})-(jan|may|nov|feb|m|june?|spec|mar)-ib-global(-politics)?-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
+    ],
+    "sample_names": [
+      "2024-nov-ib-global-politics-hl-na-paper1-tz1-qp.pdf"
+    ],
+    "confidence": 0.95
+  },
+  "ib_history": {
+    "subject": "IB History",
+    "code": "ib_history",
+    "board": "ib",
+    "syllabus": "ib",
+    "patterns": [
+      "^(\\d{4})-(jan|may|nov|feb|m|june?|spec|mar)-ib-history-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
+    ],
+    "sample_names": [
+      "2024-nov-ib-history-hl-na-paper1-tz1-qp.pdf"
+    ],
+    "confidence": 0.95
+  },
+  "ib_mathematics_aa": {
+    "subject": "IB Mathematics AA",
+    "code": "ib_mathematics_aa",
+    "board": "ib",
+    "syllabus": "ib",
+    "patterns": [
+      "^(\\d{4})-(jan|may|nov|feb|m|june?)-ib-(jan|may|nov|feb|m|june?|spec|mar)athematics(-aa)?-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
+    ],
+    "sample_names": [
+      "2024-nov-ib-mathematics-aa-hl-na-paper1-tz1-qp.pdf"
+    ],
+    "confidence": 0.95
+  },
+  "ib_music": {
+    "subject": "IB Music",
+    "code": "ib_music",
+    "board": "ib",
+    "syllabus": "ib",
+    "patterns": [
+      "^(\\d{4})-(jan|may|nov|feb|m|june?)-ib-(jan|may|nov|feb|m|june?|spec|mar)usic-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
+    ],
+    "sample_names": [
+      "2024-nov-ib-music-hl-na-paper1-tz1-qp.pdf"
+    ],
+    "confidence": 0.95
+  },
+  "ib_philosophy": {
+    "subject": "IB Philosophy",
+    "code": "ib_philosophy",
+    "board": "ib",
+    "syllabus": "ib",
+    "patterns": [
+      "^(\\d{4})-(jan|may|nov|feb|m|june?|spec|mar)-ib-philosophy-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
+    ],
+    "sample_names": [
+      "2024-nov-ib-philosophy-hl-na-paper1-tz1-qp.pdf"
+    ],
+    "confidence": 0.95
+  },
+  "ib_physics": {
+    "subject": "IB Physics",
+    "code": "ib_physics",
+    "board": "ib",
+    "syllabus": "ib",
+    "patterns": [
+      "^(\\d{4})-(jan|may|nov|feb|m|june?|spec|mar)-ib-physics-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
+    ],
+    "sample_names": [
+      "2024-nov-ib-physics-hl-na-paper1-tz1-qp.pdf"
+    ],
+    "confidence": 0.95
+  },
+  "ib_psychology": {
+    "subject": "IB Psychology",
+    "code": "ib_psychology",
+    "board": "ib",
+    "syllabus": "ib",
+    "patterns": [
+      "^(\\d{4})-(jan|may|nov|feb|m|june?|spec|mar)-ib-psychology-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
+    ],
+    "sample_names": [
+      "2024-nov-ib-psychology-hl-na-paper1-tz1-qp.pdf"
+    ],
+    "confidence": 0.95
+  },
+  "ib_social_and_cultural_anthropology": {
+    "subject": "IB Social and Cultural Anthropology",
+    "code": "ib_social_and_cultural_anthropology",
+    "board": "ib",
+    "syllabus": "ib",
+    "patterns": [
+      "^(\\d{4})-(jan|may|nov|feb|m|june?|spec|mar)-ib-social(-and-cultural-anthropology)?-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
+    ],
+    "sample_names": [
+      "2024-nov-ib-social-and-cultural-anthropology-hl-na-paper1-tz1-qp.pdf"
+    ],
+    "confidence": 0.95
+  },
+  "ib_sports_exercise_health_science": {
+    "subject": "IB Sports Exercise Health Science",
+    "code": "ib_sports_exercise_health_science",
+    "board": "ib",
+    "syllabus": "ib",
+    "patterns": [
+      "^(\\d{4})-(jan|may|nov|feb|m|june?|spec|mar)-ib-sports(-exercise-health-science)?-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
+    ],
+    "sample_names": [
+      "2024-nov-ib-sports-exercise-health-science-hl-na-paper1-tz1-qp.pdf"
+    ],
+    "confidence": 0.95
+  },
+  "ib_visual_arts": {
+    "subject": "IB Visual Arts",
+    "code": "ib_visual_arts",
+    "board": "ib",
+    "syllabus": "ib",
+    "patterns": [
+      "^(\\d{4})-(jan|may|nov|feb|m|june?|spec|mar)-ib-visual(-arts)?-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
+    ],
+    "sample_names": [
+      "2024-nov-ib-visual-arts-hl-na-paper1-tz1-qp.pdf"
+    ],
+    "confidence": 0.95
+  },
+  "4ec0/4ec1": {
     "subject": "Ed Economics (4EC0)",
     "code": "4EC0/4EC1",
     "board": "edexcel",
@@ -1563,90 +1439,417 @@
     ],
     "confidence": 0.85
   },
-  "4ge0": {
-    "subject": "Edexcel Geography (4GE0)",
-    "code": "4ge0",
-    "board": "edexcel",
-    "syllabus": "igcse",
+  "ib_itgs": {
+    "subject": "IB ITGS",
+    "code": "ib_itgs",
+    "board": "ib",
+    "syllabus": "ib",
     "patterns": [
-      "\\d{4}-[a-z]+-[a-z]+-[a-z]+-[a-z]+-\\d{4}[a-z]?-[a-z0-9]+-[a-z0-9]+-[a-z]{2}\\.(pdf| PDF)"
+      "^(\\d{4})-(jan|may|nov|feb|m|june?|spec|mar)-ib-itgs-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
     ],
     "sample_names": [
-      "2019-s-igcse-geography-edexcel-4ge1-01r-1906-ms.pdf",
-      "2019-summer-igcse-geography-edexcel-4ge1-01r-1906-ms.pdf"
-    ],
-    "confidence": 0.75
-  },
-  "4ge1": {
-    "subject": "Edexcel Geography (4GE0)",
-    "code": "4ge1",
-    "board": "edexcel",
-    "syllabus": "igcse",
-    "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$"
-    ],
-    "sample_names": [
-      "2019-jun-igcse-geography-edexcel-4ge1-p2-1-qp.pdf"
+      "2007-may-ib-itgs-hl-na-paper1-n-ms.pdf"
     ],
     "confidence": 0.95
   },
-  "4it0": {
-    "subject": "Edexcel Ict (4IT0)",
-    "code": "4it0",
-    "board": "edexcel",
-    "syllabus": "igcse",
+  "ib_english_literature": {
+    "subject": "IB English Literature",
+    "code": "ib_english_literature",
+    "board": "ib",
+    "syllabus": "ib",
     "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$",
-      "{year}-(jan|mar|jun|nov)-{level}-{subject}-{board}-{code}-{paper}-{variant}-(qp|ms|er)\\.pdf"
+      "^(\\d{4})-(jan|may|nov|feb|m|june?|spec|mar)-ib-english-literature-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
     ],
     "sample_names": [
-      "2020-nov-igcse-ict-edexcel-4it1-01-1-ms.pdf",
-      "2024-sum-igcse-ict-edexcel-4it0-01-2-qp.pdf"
+      "2015-may-ib-english-literature-sl-na-paper2-tz1-qp.pdf"
     ],
+    "confidence": 0.95
+  },
+  "ib_environmental_systems_societies_ess": {
+    "subject": "IB Environmental Systems Societies (ESS)",
+    "code": "ib_ess",
+    "board": "ib",
+    "syllabus": "ib",
+    "patterns": [
+      "^(\\d{4})-(jan|may|nov|feb|m|june?|spec|mar)-ib-environmental-systems-and-societies-ess-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
+    ],
+    "sample_names": [
+      "2005-may-ib-environmental-systems-and-societies-ess-sl-na-paper1-n-ms.pdf"
+    ],
+    "confidence": 0.95
+  },
+  "ib_social_anthropology": {
+    "subject": "IB Social Anthropology",
+    "code": "ib_social_anthropology",
+    "board": "ib",
+    "syllabus": "ib",
+    "patterns": [
+      "^(\\d{4})-(jan|may|nov|feb|m|june?|spec|mar)-ib-social-anthropology-(sl|hl)-([a-z0-9]+)-paper(\\d+)(?:-([a-z0-9]+)-([a-z]+)|-([a-z]+))\\.pdf$"
+    ],
+    "sample_names": [
+      "2000-nov-ib-social-anthropology-hl-na-paper2-tz1-ms.pdf"
+    ],
+    "confidence": 0.95
+  },
+  "0445": {
+    "subject": "Cie Design Technology (0445)",
+    "code": "0445",
+    "board": "cie",
+    "syllabus": "igcse",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-igcse-design-technology-cie-0445-(\\d+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [
+      "2023-s-igcse-design-technology-cie-0445-1-1-qp.pdf"
+    ],
+    "confidence": 0.85
+  },
+  "0454": {
+    "subject": "Cie Enterprise (0454)",
+    "code": "0454",
+    "board": "cie",
+    "syllabus": "igcse",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-igcse-enterprise-cie-0454-(\\d+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [],
     "confidence": 0.75
   },
-  "4hi0": {
-    "subject": "Edexcel History (4HI0)",
-    "code": "4hi0",
+  "0457": {
+    "subject": "Cie Global Perspectives (0457)",
+    "code": "0457",
+    "board": "cie",
+    "syllabus": "igcse",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-igcse-global-perspectives-cie-0457-(\\d+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "0509": {
+    "subject": "Cie Chinese First Language (0509)",
+    "code": "0509",
+    "board": "cie",
+    "syllabus": "igcse",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-igcse-chinese-first-language-cie-0509-(\\d+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "0523": {
+    "subject": "Cie Chinese Second Language (0523)",
+    "code": "0523",
+    "board": "cie",
+    "syllabus": "igcse",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-igcse-chinese-second-language-cie-0523-(\\d+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "0607": {
+    "subject": "Cie International Mathematics (0607)",
+    "code": "0607",
+    "board": "cie",
+    "syllabus": "igcse",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-igcse-international-mathematics-cie-0607-(\\d+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "0648": {
+    "subject": "Cie Food and Nutrition (0648)",
+    "code": "0648",
+    "board": "cie",
+    "syllabus": "igcse",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-igcse-food-and-nutrition-cie-0648-(\\d+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "0652": {
+    "subject": "Cie Physical Science (0652)",
+    "code": "0652",
+    "board": "cie",
+    "syllabus": "igcse",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-igcse-physical-science-cie-0652-(\\d+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "4ec0": {
+    "subject": "Edexcel Economics (4EC0)",
+    "code": "4ec0",
     "board": "edexcel",
     "syllabus": "igcse",
     "patterns": [
-      "^{year}-{session}-{level}-{subject}-{board}-{code}-{paper}-{variant}-{type}\\.pdf$",
-      "^{year}-{month}-{level}-{subject}-{board}-{syllabuscode}-{papernum}-{variant}-{type}\\.pdf$"
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-igcse-economics-edexcel-4ec0-(\\d+)-(\\d+)-?(qp|ms|er)\\.pdf$"
     ],
     "sample_names": [
-      "2019-jun-igcse-history-edexcel-4hi0-2-r-qp.pdf",
-      "2024-s-igcse-history-edexcel-4hi0-1-q-qp.pdf"
+      "2019-s-igcse-economics-edexcel-4ec0-01-n-ms.pdf"
     ],
+    "confidence": 0.85
+  },
+  "4hb1": {
+    "subject": "Edexcel Human Biology (4HB1)",
+    "code": "4hb1",
+    "board": "edexcel",
+    "syllabus": "igcse",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-igcse-human-biology-edexcel-4hb1-(\\d+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "7527": {
+    "subject": "AQA Drama (7527)",
+    "code": "7527",
+    "board": "aqa",
+    "syllabus": "a-level",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-alevel-drama-aqa-7527-(\\w+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "7552": {
+    "subject": "AQA Music (7552)",
+    "code": "7552",
+    "board": "aqa",
+    "syllabus": "a-level",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-alevel-music-aqa-7552-(\\w+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "7679": {
+    "subject": "AQA Sociology (7679)",
+    "code": "7679",
+    "board": "aqa",
+    "syllabus": "a-level",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-alevel-sociology-aqa-7679-(\\w+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "7712": {
+    "subject": "AQA Spanish (7712)",
+    "code": "7712",
+    "board": "aqa",
+    "syllabus": "a-level",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-alevel-spanish-aqa-7712-(\\w+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "9396": {
+    "subject": "Cie Physics (9396)",
+    "code": "9396",
+    "board": "cie",
+    "syllabus": "a-level",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-alevel-physics-cie-9396-(\\w+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "9705": {
+    "subject": "Cie Applied ICT (9705)",
+    "code": "9705",
+    "board": "cie",
+    "syllabus": "a-level",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-alevel-applied-ict-cie-9705-(\\w+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "9715": {
+    "subject": "Cie Marine Science (9715)",
+    "code": "9715",
+    "board": "cie",
+    "syllabus": "a-level",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-alevel-marine-science-cie-9715-(\\w+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "9716": {
+    "subject": "Cie Thinking Skills (9716)",
+    "code": "9716",
+    "board": "cie",
+    "syllabus": "a-level",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-alevel-thinking-skills-cie-9716-(\\w+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "9ac0": {
+    "subject": "Edexcel Accounting (9AC0)",
+    "code": "9ac0",
+    "board": "edexcel",
+    "syllabus": "a-level",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-alevel-accounting-edexcel-9ac0-(\\w+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "9bi0": {
+    "subject": "Edexcel Biology (9BI0)",
+    "code": "9bi0",
+    "board": "edexcel",
+    "syllabus": "a-level",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-alevel-biology-edexcel-9bi0-(\\w+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "9dt0": {
+    "subject": "Edexcel Design Technology (9DT0)",
+    "code": "9dt0",
+    "board": "edexcel",
+    "syllabus": "a-level",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-alevel-design-technology-edexcel-9dt0-(\\w+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "9ec0": {
+    "subject": "Edexcel Economics (9EC0)",
+    "code": "9ec0",
+    "board": "edexcel",
+    "syllabus": "a-level",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-alevel-economics-edexcel-9ec0-(\\w+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "9it0": {
+    "subject": "Edexcel ICT (9IT0)",
+    "code": "9it0",
+    "board": "edexcel",
+    "syllabus": "a-level",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-alevel-ict-edexcel-9it0-(\\w+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "9pe0": {
+    "subject": "Edexcel Physical Education (9PE0)",
+    "code": "9pe0",
+    "board": "edexcel",
+    "syllabus": "a-level",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-alevel-physical-education-edexcel-9pe0-(\\w+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "9sc0": {
+    "subject": "Edexcel Science (9SC0)",
+    "code": "9sc0",
+    "board": "edexcel",
+    "syllabus": "a-level",
+    "patterns": [
+      "^(\\d{4})-(jan|may|jun|nov|s|w|oct)-alevel-science-edexcel-9sc0-(\\w+)-(\\d+)-?(qp|ms|er)\\.pdf$"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "8ch0": {
+    "subject": "chemistry",
+    "code": "8CH0",
+    "board": "edexcel",
+    "syllabus": "alevel",
+    "patterns": [
+      "8CH0_\\w+_\\d+_\\d+_\\w+\\.pdf",
+      "[0-9]{4}_(s|jun|nov)_alevel_chemistry_edexcel_8CH0_\\d+_\\d+_\\w+\\.pdf"
+    ],
+    "sample_names": [],
     "confidence": 0.92
   },
-  "4ph1": {
-    "subject": "Edexcel Physics (4PH1)",
-    "code": "4ph1",
-    "board": "edexcel",
-    "syllabus": "igcse",
+  "": {
+    "subject": "computer science",
+    "code": "",
+    "board": "",
+    "syllabus": "alevel",
     "patterns": [
-      "^(\\d{4})-(jan|jun|nov)-(igcse)-physics-(edexcel)-([0-9a-z]+)-([0-9]+[a-z]?)-([a-z]+)\\.pdf$"
+      "\\d{4}-\\w+-(?:as|alevel|gcse|igcse)-computerscience-[a-z]+-[a-z0-9]+-p2-[a-z]+-[a-z]+\\.pdf",
+      "\\d{4}-\\w+-(?:as|alevel)-computerscience-[a-z]+-[a-z0-9]+-p2-[a-z]+\\.pdf"
     ],
-    "sample_names": [
-      "2019-jun-igcse-physics-edexcel-4ph1-2p-qp.pdf",
-      "2022-nov-igcse-physics-edexcel-4ph1-2p-qp.pdf"
-    ],
-    "confidence": 0.88
+    "sample_names": [],
+    "confidence": 0.25
   },
-  "PSYCH": {
-    "subject": "hl",
-    "code": "PSYCH",
-    "board": "ib",
-    "syllabus": "Psychology",
+  "6360": {
+    "subject": "further-mathematics",
+    "code": "6360",
+    "board": "aqa",
+    "syllabus": "alevel",
     "patterns": [
-      "^(\\d{4})-(nov|may)-((?:hl|sl))-psychology-ib-(\\d{2}/\\d/PSYCH/HS?P\\d)/([a-z]{3})/(tz\\d)/(xx)-ms\\.pdf$",
-      "^(\\d{4})-(nov|may)-((?:hl|sl))-psychology-ib-(\\d{2}/\\d/PSYCH/HS?P\\d)/([a-z]{3})/(tz\\d)/(xx)-qp\\.pdf$"
+      "aqa_6360_f2_.+\\.pdf",
+      "6360_f2_.+\\.pdf"
     ],
-    "sample_names": [
-      "2004-nov-hl-psychology-ib-N04/3/PSYCH/HSP1/ENG/TZ0/XX-ms.pdf",
-      "2004-nov-hl-psychology-ib-N04/3/PSYCH/HSP1/ENG/TZ0/XX-qp.pdf"
+    "sample_names": [],
+    "confidence": 0.7
+  },
+  "20": {
+    "subject": "history",
+    "code": "20",
+    "board": "aqa",
+    "syllabus": "alevel",
+    "patterns": [
+      "[0-9]{4}-[a-z]+-alevel-history-aqa-[0-9]+-[0-9]+-[a-z]{2,3}\\.pdf"
     ],
+    "sample_names": [],
     "confidence": 0.75
+  },
+  "7041": {
+    "subject": "history",
+    "code": "7041",
+    "board": "aqa",
+    "syllabus": "alevel",
+    "patterns": [
+      "7041_\\w+_\\w+_\\d+",
+      "aqa_alevel_history_7041"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "9371": {
+    "subject": "maths",
+    "code": "9371",
+    "board": "edexcel",
+    "syllabus": "alevel",
+    "patterns": [
+      "\\d{4}-[a-z]+-alevel-maths-edexcel-9371-2-[a-z]+-qp\\.pdf"
+    ],
+    "sample_names": [],
+    "confidence": 0.75
+  },
+  "varies": {
+    "subject": "generic",
+    "code": "varies",
+    "board": "varies",
+    "syllabus": "all",
+    "patterns": [
+      "\\d{4}-[a-z]+-[a-z]+-[a-z]+-[a-z]+-[a-z0-9]+-[a-z0-9]+-[a-z]+-[a-z]+\\.pdf",
+      "\\d{4}-[a-z]+-[a-z]+-[a-z]+-[a-z]+-[a-z0-9]+-[a-z]+-[a-z]+\\.pdf"
+    ],
+    "sample_names": [],
+    "confidence": 0.95
   }
 }
