@@ -1202,24 +1202,20 @@ def scan_pdf_directory(input_dir: Path) -> list[PaperStatus]:
 def export_to_csv(results: list[PaperStatus], output_path: Path) -> None:
     with output_path.open("w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
-        writer.writerow(["Year", "Subject", "Syllabus", "Paper", "QP", "MS", "ER", "IN", "Transcript", "Status", "QP_Path", "MS_Path", "ER_Path", "IN_Path", "Transcript_Path"])
+        # Export with paths directly in QP/MS/ER/IN/Transcript columns for better compatibility
+        writer.writerow(["Year", "Subject", "Syllabus", "Paper", "QP", "MS", "ER", "IN", "Transcript", "Status"])
         for item in results:
             writer.writerow([
                 item.year,
                 item.subject,
                 item.syllabus,
                 item.paper_key,
-                "✓" if item.has_qp else "✗",
-                "✓" if item.has_ms else "✗",
-                "✓" if item.has_er else "✗",
-                "✓" if item.has_in else "✗",
-                "✓" if item.has_transcript else "✗",
+                item.qp_path if item.qp_path != "-" else "",
+                item.ms_path if item.ms_path != "-" else "",
+                item.er_path if item.er_path != "-" else "",
+                item.in_path if item.in_path != "-" else "",
+                item.transcript_path if item.transcript_path != "-" else "",
                 item.status,
-                item.qp_path,
-                item.ms_path,
-                item.er_path,
-                item.in_path,
-                item.transcript_path,
             ])
 
 
