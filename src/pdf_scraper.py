@@ -497,7 +497,222 @@ def _get_subject_info_from_code(code: str):
     return None, None, None
 
 
-def parse_filename_to_standard(filename: str):
+def _infer_subject_rule_from_context(
+    target_subject: str | None,
+    target_board: str | None,
+    target_level: str | None = None,
+):
+    """Infer subject metadata from subject_rules using the scrape context."""
+    if not target_subject:
+        return None, None, None, None
+
+    from pathlib import Path
+
+    config_path = Path(__file__).parent.parent / "config" / "subject_rules.json"
+    if not config_path.exists():
+        return None, None, None, None
+
+    with open(config_path, encoding="utf-8") as f:
+        rules = json.load(f)
+
+    target_subject_slug = _slugify(target_subject)
+    target_board_slug = _slugify(target_board or "")
+    target_level_slug = _slugify(target_level or "")
+
+    for rule in rules.values():
+        code = str(rule.get("code", "")).lower()
+        if not code:
+            continue
+
+        board = str(rule.get("board", "")).lower()
+        syllabus = str(rule.get("syllabus", "")).lower()
+        subject_label = str(rule.get("subject", ""))
+        subject_slug = _slugify(re.sub(r"\(\d+[a-z]*\)", "", subject_label))
+
+        if target_subject_slug and target_subject_slug not in subject_slug and subject_slug not in target_subject_slug:
+            continue
+        if target_board_slug and board and target_board_slug not in board and board not in target_board_slug:
+            continue
+        if target_level_slug and syllabus and target_level_slug not in syllabus and syllabus not in target_level_slug:
+            continue
+
+        normalized_subject = re.sub(r"^\w+\s+", "", re.sub(r"\(\d+[a-z]*\)", "", subject_label)).strip()
+        if not normalized_subject:
+            normalized_subject = target_subject
+        return normalized_subject, syllabus or target_level, board or target_board, code
+
+    return None, None, None, None
+
+
+def _session_from_text(text: str) -> str | None:
+    text = text.lower()
+    if "specimen" in text:
+        return "specimen"
+    if "may-june" in text or "may june" in text or "june" in text or "jun" in text:
+        return "jun"
+    if "october-november" in text or "oct nov" in text or "november" in text or "nov" in text:
+        return "nov"
+    if "february-march" in text or "feb march" in text or "march" in text or "mar" in text:
+        return "mar"
+    return None
+
+
+def _build_contextual_standard_filename(
+    filename: str,
+    target_subject: str | None = None,
+    target_board: str | None = None,
+    target_level: str | None = None,
+    context_text: str = "",
+) -> str | None:
+    """Build a standard filename for descriptive source names using scrape context."""
+    stem = os.path.splitext(os.path.basename(filename))[0].lower().replace("_", "-")
+    text = f"{stem} {context_text}".lower()
+    subject, syllabus, board, code = _infer_subject_rule_from_context(target_subject, target_board, target_level)
+    if not (subject and syllabus and board and code):
+        return None
+
+    session = _session_from_text(text)
+    if not session:
+        return None
+
+    year_matches = re.findall(r"(20\d{2})", text)
+    year = year_matches[-1] if year_matches else None
+    if not year:
+        short_year_match = re.search(
+            r"(?:jan|feb|mar|apr|may|jun|june|jul|aug|sep|sept|oct|nov|dec)[- ]?(\d{2})\b",
+            text,
+        )
+        if short_year_match:
+            year = f"20{short_year_match.group(1)}"
+    if not year:
+        return None
+
+    type_ = None
+    if "mark-scheme" in text or "mark scheme" in text:
+        type_ = "ms"
+    elif "question-paper" in text or "question paper" in text:
+        type_ = "qp"
+    elif "specimen-paper" in text:
+        type_ = "qp"
+    elif "insert" in text:
+        type_ = "in"
+    elif "examiner-report" in text or "examiner report" in text:
+        type_ = "er"
+    if not type_:
+        return None
+
+    paper_match = re.search(r"(?:question-paper|paper)-(\d{1,2})", stem)
+    if not paper_match:
+        return None
+
+    paper_token = paper_match.group(1)
+    if len(paper_token) == 1:
+        paper_num = f"p{paper_token}"
+        variant = "n"
+    else:
+        paper_num = f"p{paper_token[0]}"
+        variant = paper_token[1]
+
+    normalized_subject = subject.replace(" ", "-").lower()
+    normalized_board = board.lower()
+    normalized_level = syllabus.lower().replace("_", "-")
+    return f"{year}-{session}-{normalized_level}-{normalized_subject}-{normalized_board}-{code}-{paper_num}-{variant}-{type_}.pdf"
+
+
+def _extract_pdf_candidates_from_href(href: str, page_url: str) -> list[tuple[str, str]]:
+    """Extract one or more direct PDF candidates from a link href."""
+    candidates: list[tuple[str, str]] = []
+    seen = set()
+
+    def add_candidate(url: str, original_filename: str) -> None:
+        key = (url, original_filename)
+        if key not in seen:
+            seen.add(key)
+            candidates.append(key)
+
+    if "?pdf=" in href or "&pdf=" in href:
+        from urllib.parse import parse_qs
+
+        parsed = urlparse(href)
+        params = parse_qs(parsed.query)
+        if "pdf" in params:
+            actual_pdf_url = params["pdf"][0]
+            nested_candidates = _extract_pdf_candidates_from_href(actual_pdf_url, page_url)
+            if nested_candidates:
+                for nested_url, nested_filename in nested_candidates:
+                    add_candidate(nested_url, nested_filename)
+            else:
+                add_candidate(actual_pdf_url, os.path.basename(urlparse(actual_pdf_url).path))
+
+    if href.lower().endswith(".pdf"):
+        actual_pdf_url = urljoin(page_url, href)
+        add_candidate(actual_pdf_url, os.path.basename(urlparse(actual_pdf_url).path))
+
+    href_lower = href.lower()
+    if "pastpapers.papacambridge.com/viewer/" in href_lower:
+        upload_base = "https://pastpapers.papacambridge.com/directories/CAIE/CAIE-pastpapers/upload/"
+        for match in re.finditer(r"([0-9a-z]{4,5})-([smwy])(\d{2})-(qp|ms|in|er|sm|sp|prm|pm|ci|gt)-(\d{2})-pdf", href_lower):
+            code, session_code, year, type_, variant = match.groups()
+            raw_filename = f"{code}_{session_code}{year}_{type_}_{variant}.pdf"
+            add_candidate(upload_base + raw_filename, raw_filename)
+
+    return candidates
+
+
+def collect_pdf_candidates_from_page(url: str) -> list[dict[str, str]]:
+    """Collect candidate PDF links from a page without downloading them."""
+    options = Options()
+    options.add_argument("--headless")
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=options)
+    pdf_urls = []
+
+    try:
+        driver.get(url)
+        time.sleep(2)
+
+        links = driver.find_elements(By.TAG_NAME, "a")
+        seen_pdf_candidates = set()
+        for link in links:
+            href = link.get_attribute("href")
+            if not href:
+                continue
+
+            text = link.text.strip()
+            title = link.get_attribute("title") or ""
+            aria_label = link.get_attribute("aria-label") or ""
+
+            try:
+                parent = link.find_element(By.XPATH, "./ancestor::*[contains(@class, 'card') or contains(@class, 'item') or contains(@class, 'paper')]")
+                parent_text = parent.text.strip()
+            except:
+                parent_text = ""
+
+            for actual_pdf_url, pdf_filename in _extract_pdf_candidates_from_href(href, url):
+                key = (actual_pdf_url, pdf_filename)
+                if key in seen_pdf_candidates:
+                    continue
+                seen_pdf_candidates.add(key)
+
+                name = text or title or aria_label or parent_text or pdf_filename
+                pdf_urls.append({
+                    "url": actual_pdf_url,
+                    "name": name,
+                    "original_filename": pdf_filename,
+                })
+
+        return pdf_urls
+    finally:
+        driver.quit()
+
+
+def parse_filename_to_standard(
+    filename: str,
+    target_subject: str | None = None,
+    target_board: str | None = None,
+    target_level: str | None = None,
+    context_text: str = "",
+):
     """Parse various filename formats to standard format.
 
     Supports:
@@ -563,6 +778,16 @@ def parse_filename_to_standard(filename: str):
             return original  # Can't parse, return original
 
         return f"unknown-date-{syllabus}-{subject}-{board}-{code}-p1-n-{type_}.pdf"
+
+    contextual = _build_contextual_standard_filename(
+        filename,
+        target_subject=target_subject,
+        target_board=target_board,
+        target_level=target_level,
+        context_text=context_text,
+    )
+    if contextual:
+        return contextual
 
     # Return original if no pattern matched
     return original
@@ -706,58 +931,33 @@ def scrape_pdfs(
         links = driver.find_elements(By.TAG_NAME, "a")
         pdf_urls = []
 
+        seen_pdf_candidates = set()
         for link in links:
             href = link.get_attribute("href")
             if not href:
                 continue
 
-            # Check if URL has ?pdf= parameter
-            if "?pdf=" in href or "&pdf=" in href:
-                from urllib.parse import parse_qs
-                parsed = urlparse(href)
-                params = parse_qs(parsed.query)
-                if "pdf" in params:
-                    actual_pdf_url = params["pdf"][0]
+            text = link.text.strip()
+            title = link.get_attribute("title") or ""
+            aria_label = link.get_attribute("aria-label") or ""
 
-                    # Extract descriptive name from multiple sources
-                    text = link.text.strip()
-                    title = link.get_attribute("title") or ""
-                    aria_label = link.get_attribute("aria-label") or ""
-
-                    # Try to get parent container text for context
-                    try:
-                        parent = link.find_element(By.XPATH, "./ancestor::*[contains(@class, 'card') or contains(@class, 'item') or contains(@class, 'paper')]")
-                        parent_text = parent.text.strip()
-                    except:
-                        parent_text = ""
-
-                    # Get the actual filename from PDF URL
-                    pdf_filename = os.path.basename(urlparse(actual_pdf_url).path)
-
-                    # Combine info for better naming
-                    name = text or title or aria_label or parent_text or pdf_filename
-
-                    pdf_urls.append({
-                        "url": actual_pdf_url,
-                        "name": name,
-                        "original_filename": pdf_filename
-                    })
-            elif href.lower().endswith(".pdf"):
-                # Direct PDF links
-                text = link.text.strip()
-                title = link.get_attribute("title") or ""
-                aria_label = link.get_attribute("aria-label") or ""
+            try:
+                parent = link.find_element(By.XPATH, "./ancestor::*[contains(@class, 'card') or contains(@class, 'item') or contains(@class, 'paper')]")
+                parent_text = parent.text.strip()
+            except:
                 parent_text = ""
-                try:
-                    parent = link.find_element(By.XPATH, "..")
-                    parent_text = parent.text.strip()
-                except:
-                    pass
-                name = text or title or aria_label or parent_text
+
+            for actual_pdf_url, pdf_filename in _extract_pdf_candidates_from_href(href, url):
+                key = (actual_pdf_url, pdf_filename)
+                if key in seen_pdf_candidates:
+                    continue
+                seen_pdf_candidates.add(key)
+
+                name = text or title or aria_label or parent_text or pdf_filename
                 pdf_urls.append({
-                    "url": urljoin(url, href),
+                    "url": actual_pdf_url,
                     "name": name,
-                    "original_filename": os.path.basename(urlparse(href).path)
+                    "original_filename": pdf_filename
                 })
 
         log(f"Found {len(pdf_urls)} PDFs\n")
@@ -806,7 +1006,13 @@ def scrape_pdfs(
                 response.raise_for_status()
 
                 # Try to parse and convert filename to standard format
-                filename = parse_filename_to_standard(original_filename)
+                filename = parse_filename_to_standard(
+                    original_filename,
+                    target_subject=target_subject,
+                    target_board=target_board,
+                    target_level=target_level,
+                    context_text=name,
+                )
 
                 # If still original and we have a descriptive name, use that
                 if filename == original_filename and name and name != original_filename:
@@ -875,34 +1081,25 @@ def scrape_for_specific_files(url, output_dir, target_patterns):
         links = driver.find_elements(By.TAG_NAME, "a")
         pdf_urls = []
 
+        seen_pdf_candidates = set()
         for link in links:
             href = link.get_attribute("href")
             if not href:
                 continue
 
-            if "?pdf=" in href or "&pdf=" in href:
-                from urllib.parse import parse_qs
-                parsed = urlparse(href)
-                params = parse_qs(parsed.query)
-                if "pdf" in params:
-                    actual_pdf_url = params["pdf"][0]
-                    pdf_filename = os.path.basename(urlparse(actual_pdf_url).path)
-                    text = link.text.strip()
-                    title = link.get_attribute("title") or ""
-                    name = text or title or pdf_filename
-                    pdf_urls.append({
-                        "url": actual_pdf_url,
-                        "name": name,
-                        "original_filename": pdf_filename
-                    })
-            elif href.lower().endswith(".pdf"):
-                text = link.text.strip()
-                title = link.get_attribute("title") or ""
-                name = text or title
+            text = link.text.strip()
+            title = link.get_attribute("title") or ""
+            for actual_pdf_url, pdf_filename in _extract_pdf_candidates_from_href(href, url):
+                key = (actual_pdf_url, pdf_filename)
+                if key in seen_pdf_candidates:
+                    continue
+                seen_pdf_candidates.add(key)
+
+                name = text or title or pdf_filename
                 pdf_urls.append({
-                    "url": urljoin(url, href),
+                    "url": actual_pdf_url,
                     "name": name,
-                    "original_filename": os.path.basename(urlparse(href).path)
+                    "original_filename": pdf_filename
                 })
 
         log(f"Found {len(pdf_urls)} PDFs on page")
@@ -947,7 +1144,7 @@ def scrape_for_specific_files(url, output_dir, target_patterns):
 
                 response.raise_for_status()
 
-                filename = parse_filename_to_standard(original_filename)
+                filename = parse_filename_to_standard(original_filename, context_text=item.get("name", ""))
                 if filename == original_filename:
                     clean_name = original_filename[:150]
                     filename = clean_name

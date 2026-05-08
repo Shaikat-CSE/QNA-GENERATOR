@@ -140,6 +140,7 @@ DEFAULT_FILENAME_ALIASES: dict[str, dict[str, list[str]]] = {
         "International Mathematics": ["international mathematics", "intl maths", "international maths"],
         "Mathematics": ["mathematics", "maths", "math", "4ma1", "mathematics and statistics"],
         "Mathematics AA": ["mathematics aa", "mathematics analysis and approaches", "aa"],
+        "Mathematics AI": ["mathematics ai", "mathematics applications and interpretation", "ai"],
         "Music": ["music", "mus"],
         "Philosophy": ["philosophy", "phil", "philo"],
         "Physical Education": ["physical education", "pe", "physical-education", "sport"],
@@ -687,6 +688,265 @@ def infer_exam_year_session_from_pdf(path: Path, exam_code: str | None = None) -
     return None, None
 
 
+def read_pdf_context(path: Path, page_limit: int = 2) -> tuple[str, str]:
+    try:
+        reader = PdfReader(str(path))
+    except Exception:
+        return "", ""
+
+    metadata = reader.metadata or {}
+    title = str(metadata.get("/Title", "")).strip()
+    text_parts: list[str] = []
+    for index in range(min(page_limit, len(reader.pages))):
+        try:
+            page_text = reader.pages[index].extract_text() or ""
+        except Exception:
+            page_text = ""
+        if page_text:
+            text_parts.append(page_text[:4000])
+    return title, "\n".join(text_parts)
+
+
+def infer_level_token_from_path(path: Path) -> str:
+    lower_parts = [part.lower() for part in path.parts]
+    if "igcse" in lower_parts:
+        return "igcse"
+    if "a level" in lower_parts or "alevel" in lower_parts:
+        return "alevel"
+    return "unknown"
+
+
+def infer_kind_from_pdf_context(current_kind: str, title: str, text: str) -> str:
+    haystack = f"{title}\n{text}".lower()
+    if "survey map" in haystack or re.search(r"\binsert\b", haystack):
+        return "in"
+    if "mark scheme" in haystack:
+        return "ms"
+    if "question booklet" in haystack or "question paper" in haystack:
+        return "qp"
+    return current_kind
+
+
+def infer_year_session_from_filename_tokens(path: Path) -> tuple[str | None, str | None]:
+    tokens = tokenize_text(path.stem)
+    year = next((token for token in tokens if is_year_token(token)), None)
+    session = extract_session_label("-".join(tokens))
+    return year, None if session == "?" else session.lower()
+
+
+def infer_session_from_free_text(text: str) -> str | None:
+    lowered = text.lower()
+    if "specimen" in lowered:
+        return "spec"
+    if any(token in lowered for token in ("may/june", "may june", "june", "jun")):
+        return "jun"
+    if any(token in lowered for token in ("october/november", "october november", "november", "nov")):
+        return "nov"
+    if any(token in lowered for token in ("february/march", "february march", "march", "mar", "january", "jan")):
+        return "mar"
+    return None
+
+
+def build_canonical_paper_key(
+    *,
+    year: str,
+    session: str,
+    level: str,
+    subject: str,
+    board: str,
+    code: str,
+    tail_tokens: list[str],
+) -> str:
+    base_tokens = [
+        year.lower(),
+        session.lower(),
+        level.lower(),
+        slugify_filename_subject(subject),
+        board.lower(),
+        code.lower(),
+    ]
+    return "-".join(normalize_paper_key_tokens(tuple(base_tokens + tail_tokens)))
+
+
+def classify_pdf_from_content(
+    path: Path,
+    current_kind: str,
+    aliases: dict[str, dict[str, list[str]]],
+) -> tuple[FilenameClassification | None, bool]:
+    title, text = read_pdf_context(path)
+    haystack = f"{title}\n{text}"
+    lowered = haystack.lower()
+
+    # Standalone survey maps are support resources, not matrix rows.
+    if "survey map" in lowered:
+        return None, True
+
+    board = infer_board_token_from_path(path) or "unknown"
+    level = infer_level_token_from_path(path)
+    _, (subject, _) = find_subject_folder(path.parent, aliases)
+    folder_code = extract_exam_code_from_path(path)
+    kind = infer_kind_from_pdf_context(current_kind, title, text)
+    year, session = infer_exam_year_session_from_pdf(path, folder_code)
+    file_year, file_session = infer_year_session_from_filename_tokens(path)
+    if not year:
+        year = file_year
+    if not session:
+        session = file_session
+    if not session:
+        session = infer_session_from_free_text(haystack)
+
+    stem_match = re.match(
+        r"^(?P<code>[a-z0-9]{4,5})_(?P<kind>qp|ms|er|in|transcript)_(?P<year>\d{4}|unknown)_(?P<session>jan|jun|mar|nov|unknown)_(?P<paper>p\d{1,2})(?:_(?P<variant>\d+))?$",
+        path.stem,
+        re.IGNORECASE,
+    )
+    if stem_match:
+        code = stem_match.group("code").lower()
+        variant = stem_match.group("variant")
+        match_year = stem_match.group("year")
+        match_session = stem_match.group("session").lower()
+        if match_year != "unknown":
+            year = match_year
+        if match_session != "unknown":
+            session = match_session
+        if not session and board == "edexcel" and year:
+            session = "jun"
+        if year and session:
+            paper_token = stem_match.group("paper").lower()
+            tail_tokens = [paper_token]
+            if variant:
+                tail_tokens.append(variant)
+            paper_key = build_canonical_paper_key(
+                year=year,
+                session=session,
+                level=level,
+                subject=subject,
+                board=board,
+                code=code,
+                tail_tokens=tail_tokens,
+            )
+            return FilenameClassification(paper_key=paper_key, kind=kind, source="content"), False
+
+    if not haystack.strip():
+        return None, False
+
+    if title.strip().lower() == "save my exams" and current_kind == "er" and "practice paper" not in lowered:
+        return None, True
+
+    cambridge_match = re.search(r"(?P<code>[0479]\d{3}|9[a-z0-9]{3})\s*[/_-]\s*(?P<component>\d{2})", haystack, re.IGNORECASE)
+    if cambridge_match and year and session:
+        code = cambridge_match.group("code").lower()
+        component = cambridge_match.group("component")
+        # Keep obvious folder/content mismatches out of the matrix.
+        allowed_crosswalks = {
+            ("0475", "0992"),
+            ("0625", "0972"),
+            ("0620", "0971"),
+            ("0500", "0990"),
+        }
+        if folder_code and code != folder_code and (folder_code, code) not in allowed_crosswalks:
+            return None, True
+        paper_key = build_canonical_paper_key(
+            year=year,
+            session=session,
+            level=level,
+            subject=subject,
+            board=board,
+            code=code,
+            tail_tokens=["p", component[0], component[1]],
+        )
+        return FilenameClassification(paper_key=paper_key, kind=kind, source="content"), False
+
+    title_component_match = re.search(r"(?P<doc>\d{2})_(?P<code>\d{4})_(?P<component>\d{2})", title, re.IGNORECASE)
+    if title_component_match and year:
+        code = title_component_match.group("code").lower()
+        component = title_component_match.group("component")
+        session = session or ("mar" if title_component_match.group("doc") == "03" else "spec")
+        paper_key = build_canonical_paper_key(
+            year=year,
+            session=session,
+            level=level,
+            subject=subject,
+            board=board,
+            code=code,
+            tail_tokens=["p", component[0], component[1]],
+        )
+        return FilenameClassification(paper_key=paper_key, kind=kind, source="content"), False
+
+    edexcel_match = re.search(r"(?P<code>4[a-z]{2}\d)\s*[/_-]\s*(?P<component>\d{2}[a-z]?)", haystack, re.IGNORECASE)
+    if edexcel_match and year:
+        code = edexcel_match.group("code").lower()
+        component = edexcel_match.group("component").lower()
+        if folder_code and code != folder_code:
+            return None, True
+        if not session:
+            session = "jun"
+        paper_key = build_canonical_paper_key(
+            year=year,
+            session=session,
+            level=level,
+            subject=subject,
+            board=board,
+            code=code,
+            tail_tokens=[component],
+        )
+        return FilenameClassification(paper_key=paper_key, kind=kind, source="content"), False
+
+    specimen_match = re.search(r"\b(?P<year>20\d{2})\s*specimen\s*paper\s*(?P<paper>\d{1,2})\b", lowered, re.IGNORECASE)
+    if specimen_match and folder_code:
+        paper_key = build_canonical_paper_key(
+            year=specimen_match.group("year"),
+            session="spec",
+            level=level,
+            subject=subject,
+            board=board,
+            code=folder_code,
+            tail_tokens=["p", str(int(specimen_match.group("paper"))), "n"],
+        )
+        return FilenameClassification(paper_key=paper_key, kind=kind, source="content"), False
+
+    june_series_match = re.search(r"\b(?P<year>20\d{2})\s*june\s*series\s*\d*\s*paper\s*(?P<paper>\d{1,2})\b", lowered, re.IGNORECASE)
+    if june_series_match and folder_code:
+        paper_key = build_canonical_paper_key(
+            year=june_series_match.group("year"),
+            session="jun",
+            level=level,
+            subject=subject,
+            board=board,
+            code=folder_code,
+            tail_tokens=["p", str(int(june_series_match.group("paper"))), "n"],
+        )
+        return FilenameClassification(paper_key=paper_key, kind=kind, source="content"), False
+
+    practice_match = re.search(r"\bpractice\s*paper\s*(?P<paper>\d)(?P<variant>[a-z])\b", lowered, re.IGNORECASE)
+    if practice_match and "save my exams" in lowered and folder_code:
+        paper_key = build_canonical_paper_key(
+            year=year or str(MAX_VALID_PAPER_YEAR),
+            session="spec",
+            level=level,
+            subject=subject,
+            board=board,
+            code=folder_code,
+            tail_tokens=["practice", practice_match.group("paper"), practice_match.group("variant").lower()],
+        )
+        return FilenameClassification(paper_key=paper_key, kind=kind, source="content"), False
+
+    insert_title_match = re.search(r"\b(?P<code>\d{4})_y(?P<year>\d{2})_si_(?P<paper>\d+)\b", title, re.IGNORECASE)
+    if insert_title_match:
+        paper_key = build_canonical_paper_key(
+            year=f"20{insert_title_match.group('year')}",
+            session="spec",
+            level=level,
+            subject=subject,
+            board="cambridge",
+            code=insert_title_match.group("code").lower(),
+            tail_tokens=["paper", str(int(insert_title_match.group("paper")))],
+        )
+        return FilenameClassification(paper_key=paper_key, kind="in", source="content"), False
+
+    return None, False
+
+
 def sort_year_values(years: set[str]) -> list[str]:
     def year_key(value: str) -> tuple[int, int | str]:
         if value.isdigit():
@@ -920,6 +1180,11 @@ def classify_pdf_filename(
         )
 
     if not alias_key_is_exact_enough(key_source_tokens, key_tokens, aliases):
+        content_classification, should_ignore = classify_pdf_from_content(path, kind, aliases)
+        if should_ignore:
+            return None, None
+        if content_classification is not None:
+            return content_classification, None
         return (
             None,
             ReviewItem(
@@ -996,8 +1261,17 @@ def extract_subject_syllabus_from_folder(folder_path: Path, aliases: dict[str, d
     folder_tokens = tuple(folder_name.lower().split())
     folder_lower = folder_name.lower()
     parent_name = folder_path.parent.name if folder_path.parent != folder_path else ""
+    sorted_subject_aliases = sorted(
+        aliases.get("subject_aliases", {}).items(),
+        key=lambda item: (
+            len(tuple(item[0].lower().split())),
+            len(item[0]),
+            max((len(tuple(value.lower().split())) for value in item[1]), default=0),
+        ),
+        reverse=True,
+    )
 
-    for label, values in aliases.get("subject_aliases", {}).items():
+    for label, values in sorted_subject_aliases:
         if label.lower() in folder_lower:
             subject = label
             break
@@ -1030,19 +1304,52 @@ def extract_subject_syllabus_from_folder(folder_path: Path, aliases: dict[str, d
             break
 
     if subject == "unknown":
-        match = re.search(r'\(([^)]+)\)', folder_name)
-        if match:
-            code = match.group(1)
-            code_lower = code.lower()
-            for s_label, s_values in aliases.get("subject_aliases", {}).items():
-                if code_lower in [v.lower() for v in s_values]:
-                    subject = s_label
+        # Try to extract from parent folder first before falling back to code
+        if parent_name:
+            parent_lower = parent_name.lower()
+            parent_tokens = tuple(parent_lower.split())
+
+            # First pass: exact label matches (highest priority)
+            for label, values in sorted_subject_aliases:
+                if label.lower() == parent_lower:
+                    subject = label
                     break
+
+            # Second pass: multi-word label substring matches
             if subject == "unknown":
-                if code.isdigit():
-                    subject = code
-                else:
-                    subject = folder_name.split()[0] if folder_name.split() else "unknown"
+                for label, values in sorted_subject_aliases:
+                    label_tokens = tuple(label.lower().split())
+                    if len(label_tokens) > 1 and label.lower() in parent_lower:
+                        subject = label
+                        break
+
+            # Third pass: check aliases with word boundary matching
+            if subject == "unknown":
+                for label, values in sorted_subject_aliases:
+                    for v in values:
+                        v_tokens = tuple(v.lower().split())
+                        # Only match if all tokens in alias are present as complete words
+                        if all(token in parent_tokens for token in v_tokens):
+                            subject = label
+                            break
+                    if subject != "unknown":
+                        break
+
+        # If still unknown, try extracting code from parentheses
+        if subject == "unknown":
+            match = re.search(r'\(([^)]+)\)', folder_name)
+            if match:
+                code = match.group(1)
+                code_lower = code.lower()
+                for s_label, s_values in aliases.get("subject_aliases", {}).items():
+                    if code_lower in [v.lower() for v in s_values]:
+                        subject = s_label
+                        break
+                if subject == "unknown":
+                    if code.isdigit():
+                        subject = code
+                    else:
+                        subject = folder_name.split()[0] if folder_name.split() else "unknown"
 
     return subject, syllabus
 
@@ -1050,14 +1357,26 @@ def extract_subject_syllabus_from_folder(folder_path: Path, aliases: dict[str, d
 def find_subject_folder(folder_path: Path, aliases: dict[str, dict[str, list[str]]]) -> tuple[Path, tuple[str, str]]:
     """Find the folder that contains subject info by traversing up the tree."""
     current = folder_path
+    best_match = None
+    best_match_folder = None
+    best_match_score = 0
+
     for _ in range(5):
         result = extract_subject_syllabus_from_folder(current, aliases)
         if result[0] != "unknown":
-            return current, result
+            # Score the match: prefer longer, more specific subject names
+            score = len(result[0])
+            if score > best_match_score:
+                best_match = result
+                best_match_folder = current
+                best_match_score = score
         parent = current.parent
         if parent == current:
             break
         current = parent
+
+    if best_match:
+        return best_match_folder, best_match
     return folder_path, ("unknown", "unknown")
 
 
@@ -1203,11 +1522,23 @@ def export_to_csv(results: list[PaperStatus], output_path: Path) -> None:
     with output_path.open("w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         # Export with paths directly in QP/MS/ER/IN/Transcript columns for better compatibility
-        writer.writerow(["Year", "Subject", "Syllabus", "Paper", "QP", "MS", "ER", "IN", "Transcript", "Status"])
+        writer.writerow(["Year", "Session", "Subject", "Code", "Syllabus", "Paper", "QP", "MS", "ER", "IN", "Transcript", "Status"])
         for item in results:
+            # Extract subject code from paper_key or path (for Cambridge/Edexcel)
+            # IB papers don't have codes, so this will be empty for IB
+            code = ""
+            if item.syllabus.upper() != "IB":
+                code = extract_exam_code_token(item.paper_key)
+                if not code:
+                    path = item.qp_path if item.qp_path != "-" else item.ms_path
+                    if path != "-":
+                        code = extract_exam_code_from_path(Path(path))
+
             writer.writerow([
                 item.year,
+                item.session,
                 item.subject,
+                code if code else "",
                 item.syllabus,
                 item.paper_key,
                 item.qp_path if item.qp_path != "-" else "",
